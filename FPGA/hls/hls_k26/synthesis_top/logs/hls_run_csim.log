@@ -1,0 +1,331 @@
+  **** HLS Build v2025.2 6295257
+INFO: [HLS 200-2005] Using work_dir D:/FPGAProject/hls/hls_k26/synthesis_top 
+INFO: [HLS 200-2176] Writing Vitis IDE component file D:/FPGAProject/hls/hls_k26/synthesis_top/vitis-comp.json
+INFO: [HLS 200-10] Creating and opening component 'D:/FPGAProject/hls/hls_k26/synthesis_top'.
+INFO: [HLS 200-1505] Using default flow_target 'vivado'
+Resolution: For help on HLS 200-1505 see docs.amd.com/access/sources/dita/topic?Doc_Version=2025.2%20English&url=ug1448-hls-guidance&resourceid=200-1505.html
+INFO: [HLS 200-2174] Applying component config ini file hls_config.cfg
+INFO: [HLS 200-1465] Applying config ini 'syn.file=D:/FPGAProject/hls/src/synthesis_top.cpp' from hls_config.cfg(8)
+INFO: [HLS 200-10] Adding design file 'D:/FPGAProject/hls/src/synthesis_top.cpp' to the project
+INFO: [HLS 200-1465] Applying config ini 'syn.file=D:/FPGAProject/hls/src/hw_lib/activation_utils.hpp' from hls_config.cfg(9)
+INFO: [HLS 200-10] Adding design file 'D:/FPGAProject/hls/src/hw_lib/activation_utils.hpp' to the project
+INFO: [HLS 200-1465] Applying config ini 'syn.file=D:/FPGAProject/hls/src/hw_lib/conv1_specialized.hpp' from hls_config.cfg(10)
+INFO: [HLS 200-10] Adding design file 'D:/FPGAProject/hls/src/hw_lib/conv1_specialized.hpp' to the project
+INFO: [HLS 200-1465] Applying config ini 'syn.file=D:/FPGAProject/hls/src/hw_lib/general_1d_conv_accelerator.hpp' from hls_config.cfg(11)
+INFO: [HLS 200-10] Adding design file 'D:/FPGAProject/hls/src/hw_lib/general_1d_conv_accelerator.hpp' to the project
+INFO: [HLS 200-1465] Applying config ini 'syn.file=D:/FPGAProject/hls/src/hw_lib/pool_accelerator.hpp' from hls_config.cfg(12)
+INFO: [HLS 200-10] Adding design file 'D:/FPGAProject/hls/src/hw_lib/pool_accelerator.hpp' to the project
+INFO: [HLS 200-1465] Applying config ini 'syn.file=D:/FPGAProject/hls/src/hw_lib/stream_utils.hpp' from hls_config.cfg(13)
+INFO: [HLS 200-10] Adding design file 'D:/FPGAProject/hls/src/hw_lib/stream_utils.hpp' to the project
+INFO: [HLS 200-1465] Applying config ini 'syn.cflags=-ID:/FPGAProject/hls/src -ID:/FPGAProject/hls/src/hw_lib' from hls_config.cfg(15)
+INFO: [HLS 200-1465] Applying config ini 'tb.file=D:/FPGAProject/hls/src/testbench.cpp' from hls_config.cfg(14)
+INFO: [HLS 200-10] Adding test bench file 'D:/FPGAProject/hls/src/testbench.cpp' to the project
+INFO: [HLS 200-1465] Applying config ini 'tb.cflags=-ID:/FPGAProject/hls/src -ID:/FPGAProject/hls/src/hw_lib' from hls_config.cfg(16)
+INFO: [HLS 200-1465] Applying config ini 'syn.top=synthesis_top' from hls_config.cfg(7)
+INFO: [HLS 200-1465] Applying config ini 'flow_target=vivado' from hls_config.cfg(4)
+INFO: [HLS 200-1505] Using flow_target 'vivado'
+Resolution: For help on HLS 200-1505 see docs.amd.com/access/sources/dita/topic?Doc_Version=2025.2%20English&url=ug1448-hls-guidance&resourceid=200-1505.html
+INFO: [HLS 200-1465] Applying config ini 'part=xck26-sfvc784-2LV-c' from hls_config.cfg(1)
+INFO: [HLS 200-1611] Setting target device to 'xck26-sfvc784-2LV-c'
+INFO: [HLS 200-1465] Applying config ini 'clock=10' from hls_config.cfg(17)
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 10ns.
+INFO: [HLS 200-1465] Applying config ini 'csim.clean=1' from hls_config.cfg(18)
+INFO: [HLS 200-1465] Applying config ini 'package.output.format=ip_catalog' from hls_config.cfg(5)
+INFO: [HLS 200-2176] Writing Vitis IDE component file D:/FPGAProject/hls/hls_k26/synthesis_top/vitis-comp.json
+INFO: [SIM 211-2] *************** CSIM start ***************
+INFO: [HLS 200-2191] C-Simulation will use clang-16 as the compiler
+INFO: [HLS 200-2036] Building debug C Simulation binaries
+   Compiling ../../../../../src/testbench.cpp in debug mode
+   Compiling ../../../../../src/synthesis_top.cpp in debug mode
+   Generating csim.exe
+In file included from ../../../../../src/testbench.cpp:10:
+In file included from D:/AMDDesignTools2/2025.2/Vitis/include\ap_int.h:10:
+In file included from D:/AMDDesignTools2/2025.2/Vitis/include\etc/ap_common.h:668:
+In file included from D:/AMDDesignTools2/2025.2/Vitis/include\etc/ap_private.h:68:
+In file included from D:/AMDDesignTools2/2025.2/Vitis/include\hls_half.h:26:
+In file included from D:/AMDDesignTools2/2025.2/Vitis/include/etc/hls_half_fpo.h:19:
+In file included from D:/AMDDesignTools2/2025.2/Vitis/include\hls_fpo.h:140:
+In file included from D:/AMDDesignTools2/2025.2/Vitis/include/floating_point_v7_1_bitacc_cmodel.h:150:
+D:/AMDDesignTools2/2025.2/Vitis/include\gmp.h:58:9: warning: '__GMP_LIBGMP_DLL' macro redefined [-Wmacro-redefined]
+#define __GMP_LIBGMP_DLL  0
+        ^
+D:/AMDDesignTools2/2025.2/Vitis/include/floating_point_v7_1_bitacc_cmodel.h:142:9: note: previous definition is here
+#define __GMP_LIBGMP_DLL 1
+        ^
+1 warning generated.
+In file included from ../../../../../src/synthesis_top.cpp:1:
+In file included from D:/FPGAProject/hls/src/activation_utils.hpp:4:
+In file included from D:/AMDDesignTools2/2025.2/Vitis/include\ap_int.h:10:
+In file included from D:/AMDDesignTools2/2025.2/Vitis/include\etc/ap_common.h:668:
+In file included from D:/AMDDesignTools2/2025.2/Vitis/include\etc/ap_private.h:68:
+In file included from D:/AMDDesignTools2/2025.2/Vitis/include\hls_half.h:26:
+In file included from D:/AMDDesignTools2/2025.2/Vitis/include/etc/hls_half_fpo.h:19:
+In file included from D:/AMDDesignTools2/2025.2/Vitis/include\hls_fpo.h:140:
+In file included from D:/AMDDesignTools2/2025.2/Vitis/include/floating_point_v7_1_bitacc_cmodel.h:150:
+D:/AMDDesignTools2/2025.2/Vitis/include\gmp.h:58:9: warning: '__GMP_LIBGMP_DLL' macro redefined [-Wmacro-redefined]
+#define __GMP_LIBGMP_DLL  0
+        ^
+D:/AMDDesignTools2/2025.2/Vitis/include/floating_point_v7_1_bitacc_cmodel.h:142:9: note: previous definition is here
+#define __GMP_LIBGMP_DLL 1
+        ^
+1 warning generated.
+=============================================
+ AnyBit V20 | Cold/Steady Split Testbench
+=============================================
+[Dataset] policy=balanced, requested=240, loaded=240
+[Dataset] label histogram: class0=60 class1=60 class2=60 class3=60
+
+[Cold Start] Running 1 sample with weight reload...
+[Cold Start] Sample0: True=0 Pred=0 [OK]
+[Cold Start] Done. (This latency includes weight loading)
+
+[Steady State] Running 240 samples (no reload)...
+Sample 0: True=0 Pred=0 [OK]
+Sample 1: True=1 Pred=1 [OK]
+Sample 2: True=2 Pred=2 [OK]
+Sample 3: True=3 Pred=3 [OK]
+Sample 4: True=0 Pred=0 [OK]
+Sample 5: True=1 Pred=1 [OK]
+Sample 6: True=2 Pred=2 [OK]
+Sample 7: True=3 Pred=3 [OK]
+Sample 8: True=0 Pred=0 [OK]
+Sample 9: True=1 Pred=1 [OK]
+Sample 10: True=2 Pred=2 [OK]
+Sample 11: True=3 Pred=3 [OK]
+Sample 12: True=0 Pred=0 [OK]
+Sample 13: True=1 Pred=1 [OK]
+Sample 14: True=2 Pred=2 [OK]
+Sample 15: True=3 Pred=3 [OK]
+Sample 16: True=0 Pred=0 [OK]
+Sample 17: True=1 Pred=1 [OK]
+Sample 18: True=2 Pred=2 [OK]
+Sample 19: True=3 Pred=3 [OK]
+Sample 20: True=0 Pred=0 [OK]
+Sample 21: True=1 Pred=1 [OK]
+Sample 22: True=2 Pred=2 [OK]
+Sample 23: True=3 Pred=3 [OK]
+Sample 24: True=0 Pred=0 [OK]
+Sample 25: True=1 Pred=1 [OK]
+Sample 26: True=2 Pred=2 [OK]
+Sample 27: True=3 Pred=3 [OK]
+Sample 28: True=0 Pred=0 [OK]
+Sample 29: True=1 Pred=1 [OK]
+Sample 30: True=2 Pred=2 [OK]
+Sample 31: True=3 Pred=3 [OK]
+Sample 32: True=0 Pred=0 [OK]
+Sample 33: True=1 Pred=1 [OK]
+Sample 34: True=2 Pred=2 [OK]
+Sample 35: True=3 Pred=3 [OK]
+Sample 36: True=0 Pred=0 [OK]
+Sample 37: True=1 Pred=1 [OK]
+Sample 38: True=2 Pred=2 [OK]
+Sample 39: True=3 Pred=3 [OK]
+Sample 40: True=0 Pred=0 [OK]
+Sample 41: True=1 Pred=1 [OK]
+Sample 42: True=2 Pred=2 [OK]
+Sample 43: True=3 Pred=3 [OK]
+Sample 44: True=0 Pred=0 [OK]
+Sample 45: True=1 Pred=1 [OK]
+Sample 46: True=2 Pred=2 [OK]
+Sample 47: True=3 Pred=3 [OK]
+Sample 48: True=0 Pred=0 [OK]
+Sample 49: True=1 Pred=1 [OK]
+Sample 50: True=2 Pred=2 [OK]
+Sample 51: True=3 Pred=3 [OK]
+Sample 52: True=0 Pred=0 [OK]
+Sample 53: True=1 Pred=1 [OK]
+Sample 54: True=2 Pred=2 [OK]
+Sample 55: True=3 Pred=3 [OK]
+Sample 56: True=0 Pred=0 [OK]
+Sample 57: True=1 Pred=1 [OK]
+Sample 58: True=2 Pred=2 [OK]
+Sample 59: True=3 Pred=3 [OK]
+Sample 60: True=0 Pred=0 [OK]
+Sample 61: True=1 Pred=1 [OK]
+Sample 62: True=2 Pred=2 [OK]
+Sample 63: True=3 Pred=3 [OK]
+Sample 64: True=0 Pred=0 [OK]
+Sample 65: True=1 Pred=1 [OK]
+Sample 66: True=2 Pred=2 [OK]
+Sample 67: True=3 Pred=3 [OK]
+Sample 68: True=0 Pred=0 [OK]
+Sample 69: True=1 Pred=1 [OK]
+Sample 70: True=2 Pred=2 [OK]
+Sample 71: True=3 Pred=3 [OK]
+Sample 72: True=0 Pred=0 [OK]
+Sample 73: True=1 Pred=1 [OK]
+Sample 74: True=2 Pred=2 [OK]
+Sample 75: True=3 Pred=3 [OK]
+Sample 76: True=0 Pred=0 [OK]
+Sample 77: True=1 Pred=1 [OK]
+Sample 78: True=2 Pred=2 [OK]
+Sample 79: True=3 Pred=3 [OK]
+Sample 80: True=0 Pred=0 [OK]
+Sample 81: True=1 Pred=1 [OK]
+Sample 82: True=2 Pred=2 [OK]
+Sample 83: True=3 Pred=3 [OK]
+Sample 84: True=0 Pred=0 [OK]
+Sample 85: True=1 Pred=1 [OK]
+Sample 86: True=2 Pred=2 [OK]
+Sample 87: True=3 Pred=3 [OK]
+Sample 88: True=0 Pred=0 [OK]
+Sample 89: True=1 Pred=1 [OK]
+Sample 90: True=2 Pred=2 [OK]
+Sample 91: True=3 Pred=3 [OK]
+Sample 92: True=0 Pred=0 [OK]
+Sample 93: True=1 Pred=1 [OK]
+Sample 94: True=2 Pred=2 [OK]
+Sample 95: True=3 Pred=3 [OK]
+Sample 96: True=0 Pred=0 [OK]
+Sample 97: True=1 Pred=1 [OK]
+Sample 98: True=2 Pred=2 [OK]
+Sample 99: True=3 Pred=3 [OK]
+Sample 100: True=0 Pred=0 [OK]
+Sample 101: True=1 Pred=1 [OK]
+Sample 102: True=2 Pred=2 [OK]
+Sample 103: True=3 Pred=3 [OK]
+Sample 104: True=0 Pred=0 [OK]
+Sample 105: True=1 Pred=1 [OK]
+Sample 106: True=2 Pred=2 [OK]
+Sample 107: True=3 Pred=3 [OK]
+Sample 108: True=0 Pred=0 [OK]
+Sample 109: True=1 Pred=1 [OK]
+Sample 110: True=2 Pred=2 [OK]
+Sample 111: True=3 Pred=3 [OK]
+Sample 112: True=0 Pred=0 [OK]
+Sample 113: True=1 Pred=1 [OK]
+Sample 114: True=2 Pred=2 [OK]
+Sample 115: True=3 Pred=3 [OK]
+Sample 116: True=0 Pred=0 [OK]
+Sample 117: True=1 Pred=1 [OK]
+Sample 118: True=2 Pred=2 [OK]
+Sample 119: True=3 Pred=3 [OK]
+Sample 120: True=0 Pred=0 [OK]
+Sample 121: True=1 Pred=1 [OK]
+Sample 122: True=2 Pred=2 [OK]
+Sample 123: True=3 Pred=3 [OK]
+Sample 124: True=0 Pred=0 [OK]
+Sample 125: True=1 Pred=1 [OK]
+Sample 126: True=2 Pred=2 [OK]
+Sample 127: True=3 Pred=3 [OK]
+Sample 128: True=0 Pred=0 [OK]
+Sample 129: True=1 Pred=1 [OK]
+Sample 130: True=2 Pred=2 [OK]
+Sample 131: True=3 Pred=3 [OK]
+Sample 132: True=0 Pred=0 [OK]
+Sample 133: True=1 Pred=1 [OK]
+Sample 134: True=2 Pred=2 [OK]
+Sample 135: True=3 Pred=3 [OK]
+Sample 136: True=0 Pred=0 [OK]
+Sample 137: True=1 Pred=1 [OK]
+Sample 138: True=2 Pred=2 [OK]
+Sample 139: True=3 Pred=3 [OK]
+Sample 140: True=0 Pred=0 [OK]
+Sample 141: True=1 Pred=1 [OK]
+Sample 142: True=2 Pred=2 [OK]
+Sample 143: True=3 Pred=3 [OK]
+Sample 144: True=0 Pred=0 [OK]
+Sample 145: True=1 Pred=1 [OK]
+Sample 146: True=2 Pred=2 [OK]
+Sample 147: True=3 Pred=3 [OK]
+Sample 148: True=0 Pred=0 [OK]
+Sample 149: True=1 Pred=1 [OK]
+Sample 150: True=2 Pred=2 [OK]
+Sample 151: True=3 Pred=3 [OK]
+Sample 152: True=0 Pred=0 [OK]
+Sample 153: True=1 Pred=1 [OK]
+Sample 154: True=2 Pred=2 [OK]
+Sample 155: True=3 Pred=3 [OK]
+Sample 156: True=0 Pred=0 [OK]
+Sample 157: True=1 Pred=1 [OK]
+Sample 158: True=2 Pred=2 [OK]
+Sample 159: True=3 Pred=3 [OK]
+Sample 160: True=0 Pred=0 [OK]
+Sample 161: True=1 Pred=1 [OK]
+Sample 162: True=2 Pred=2 [OK]
+Sample 163: True=3 Pred=3 [OK]
+Sample 164: True=0 Pred=0 [OK]
+Sample 165: True=1 Pred=1 [OK]
+Sample 166: True=2 Pred=2 [OK]
+Sample 167: True=3 Pred=3 [OK]
+Sample 168: True=0 Pred=0 [OK]
+Sample 169: True=1 Pred=1 [OK]
+Sample 170: True=2 Pred=2 [OK]
+Sample 171: True=3 Pred=3 [OK]
+Sample 172: True=0 Pred=0 [OK]
+Sample 173: True=1 Pred=1 [OK]
+Sample 174: True=2 Pred=2 [OK]
+Sample 175: True=3 Pred=3 [OK]
+Sample 176: True=0 Pred=0 [OK]
+Sample 177: True=1 Pred=1 [OK]
+Sample 178: True=2 Pred=2 [OK]
+Sample 179: True=3 Pred=3 [OK]
+Sample 180: True=0 Pred=0 [OK]
+Sample 181: True=1 Pred=1 [OK]
+Sample 182: True=2 Pred=2 [OK]
+Sample 183: True=3 Pred=3 [OK]
+Sample 184: True=0 Pred=0 [OK]
+Sample 185: True=1 Pred=1 [OK]
+Sample 186: True=2 Pred=2 [OK]
+Sample 187: True=3 Pred=3 [OK]
+Sample 188: True=0 Pred=0 [OK]
+Sample 189: True=1 Pred=1 [OK]
+Sample 190: True=2 Pred=2 [OK]
+Sample 191: True=3 Pred=3 [OK]
+Sample 192: True=0 Pred=0 [OK]
+Sample 193: True=1 Pred=1 [OK]
+Sample 194: True=2 Pred=2 [OK]
+Sample 195: True=3 Pred=3 [OK]
+Sample 196: True=0 Pred=0 [OK]
+Sample 197: True=1 Pred=1 [OK]
+Sample 198: True=2 Pred=2 [OK]
+Sample 199: True=3 Pred=3 [OK]
+Sample 200: True=0 Pred=0 [OK]
+Sample 201: True=1 Pred=1 [OK]
+Sample 202: True=2 Pred=2 [OK]
+Sample 203: True=3 Pred=3 [OK]
+Sample 204: True=0 Pred=0 [OK]
+Sample 205: True=1 Pred=1 [OK]
+Sample 206: True=2 Pred=2 [OK]
+Sample 207: True=3 Pred=3 [OK]
+Sample 208: True=0 Pred=0 [OK]
+Sample 209: True=1 Pred=1 [OK]
+Sample 210: True=2 Pred=2 [OK]
+Sample 211: True=3 Pred=3 [OK]
+Sample 212: True=0 Pred=0 [OK]
+Sample 213: True=1 Pred=1 [OK]
+Sample 214: True=2 Pred=2 [OK]
+Sample 215: True=3 Pred=3 [OK]
+Sample 216: True=0 Pred=0 [OK]
+Sample 217: True=1 Pred=1 [OK]
+Sample 218: True=2 Pred=2 [OK]
+Sample 219: True=3 Pred=3 [OK]
+Sample 220: True=0 Pred=0 [OK]
+Sample 221: True=1 Pred=1 [OK]
+Sample 222: True=2 Pred=2 [OK]
+Sample 223: True=3 Pred=3 [OK]
+Sample 224: True=0 Pred=0 [OK]
+Sample 225: True=1 Pred=1 [OK]
+Sample 226: True=2 Pred=2 [OK]
+Sample 227: True=3 Pred=3 [OK]
+Sample 228: True=0 Pred=0 [OK]
+Sample 229: True=1 Pred=1 [OK]
+Sample 230: True=2 Pred=2 [OK]
+Sample 231: True=3 Pred=3 [OK]
+Sample 232: True=0 Pred=0 [OK]
+Sample 233: True=1 Pred=1 [OK]
+Sample 234: True=2 Pred=2 [OK]
+Sample 235: True=3 Pred=3 [OK]
+Sample 236: True=0 Pred=0 [OK]
+Sample 237: True=1 Pred=1 [OK]
+Sample 238: True=2 Pred=2 [OK]
+Sample 239: True=3 Pred=3 [OK]
+
+[Steady State] Accuracy: 240/240
+[Steady State] Throughput metric: 240 samples processed.
+[Note] Divide total cycles by N to get per-sample steady cycles.
+INFO [HLS SIM]: The maximum depth reached by any hls::stream() instance in the design is 2776320
+INFO: [SIM 211-1] CSim done with 0 errors.
+INFO: [SIM 211-3] *************** CSIM finish ***************
+INFO: [HLS 200-112] Total CPU user time: 1 seconds. Total CPU system time: 7 seconds. Total elapsed time: 474.556 seconds; peak allocated memory: 144.098 MB.
+INFO: [vitis-run 60-791] Total elapsed time: 0h 8m 1s
