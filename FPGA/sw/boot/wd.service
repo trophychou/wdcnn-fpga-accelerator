@@ -1,0 +1,15 @@
+[Unit]
+Description=WDCNN realtime inference (KV260 KV260 7-way)
+After=local-fs.target systemd-modules-load.service
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+ExecStart=/bin/sh /home/ubuntu/sw/wd_boot.sh
+Restart=always
+RestartSec=5
+KillMode=process
+TimeoutStopSec=10
+
+[Install]
+WantedBy=multi-user.target
