@@ -1,0 +1,112 @@
+{
+  "model_json": "D:\\AutoBulider\\wdcnn_xjty\\model.json",
+  "model_path": "D:\\AutoBulider\\wdcnn_xjty\\output/wdcnn_relu.pth",
+  "train_path": "D:\\AutoBulider\\wdcnn_xjty\\data/XJTY_train_amp.csv",
+  "test_path": "D:\\AutoBulider\\wdcnn_xjty\\data/XJTY_test_amp.csv",
+  "num_classes": 4,
+  "calibration_policy": "train_only_balanced",
+  "calib_per_class": 100,
+  "s_in_scale": 5.08732560604007,
+  "fp32_correct": 240,
+  "fp32_total": 240,
+  "fp32_accuracy": 1.0,
+  "int8_correct": 240,
+  "int8_total": 240,
+  "int8_accuracy": 1.0,
+  "fp32_confusion": [
+    [
+      60,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      60,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      60,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      60
+    ]
+  ],
+  "int8_confusion": [
+    [
+      60,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      60,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      60,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      60
+    ]
+  ],
+  "layers": {
+    "L1": {
+      "name": "Conv1",
+      "inc": 363,
+      "shift": 17,
+      "w_bit": 8
+    },
+    "L2": {
+      "name": "Conv2",
+      "inc": 155,
+      "shift": 15,
+      "w_bit": 8
+    },
+    "L3": {
+      "name": "Conv3",
+      "inc": 421,
+      "shift": 17,
+      "w_bit": 8
+    },
+    "L4": {
+      "name": "Conv4",
+      "inc": 223,
+      "shift": 16,
+      "w_bit": 8
+    },
+    "L5": {
+      "name": "Conv5",
+      "inc": 211,
+      "shift": 16,
+      "w_bit": 8
+    },
+    "L6": {
+      "name": "FC1",
+      "inc": 25,
+      "shift": 17,
+      "w_bit": 8
+    },
+    "L7": {
+      "name": "FC2",
+      "inc": 41,
+      "shift": 15,
+      "w_bit": 8
+    }
+  }
+}
