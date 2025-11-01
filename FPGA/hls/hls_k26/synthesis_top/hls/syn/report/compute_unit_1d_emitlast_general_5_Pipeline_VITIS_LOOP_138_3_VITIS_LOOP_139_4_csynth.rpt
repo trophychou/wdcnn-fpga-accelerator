@@ -1,0 +1,167 @@
+
+
+================================================================
+== Vitis HLS Report for 'compute_unit_1d_emitlast_general_5_Pipeline_VITIS_LOOP_138_3_VITIS_LOOP_139_4'
+================================================================
+* Date:           Thu Oct 29 19:07:54 2026
+
+* Version:        2025.2 (Build 6295257 on Nov 12 2025)
+* Project:        synthesis_top
+* Solution:       hls (Vivado IP Flow Target)
+* Product family: zynquplus
+* Target device:  xck26-sfvc784-2LV-c
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing: 
+    * Summary: 
+    +--------+----------+----------+------------+
+    |  Clock |  Target  | Estimated| Uncertainty|
+    +--------+----------+----------+------------+
+    |ap_clk  |  10.00 ns|  2.515 ns|     2.70 ns|
+    +--------+----------+----------+------------+
+
++ Latency: 
+    * Summary: 
+    +---------+---------+----------+----------+-----+-----+-------------------+
+    |  Latency (cycles) |  Latency (absolute) |  Interval |      Pipeline     |
+    |   min   |   max   |    min   |    max   | min | max |        Type       |
+    +---------+---------+----------+----------+-----+-----+-------------------+
+    |       66|       66|  0.660 us|  0.660 us|    0|    0|  loop pipeline stp|
+    +---------+---------+----------+----------+-----+-----+-------------------+
+
+    + Detail: 
+        * Instance: 
+        N/A
+
+        * Loop: 
+        +-------------------------------------+---------+---------+----------+-----------+-----------+------+----------+
+        |                                     |  Latency (cycles) | Iteration|  Initiation Interval  | Trip |          |
+        |              Loop Name              |   min   |   max   |  Latency |  achieved |   target  | Count| Pipelined|
+        +-------------------------------------+---------+---------+----------+-----------+-----------+------+----------+
+        |- VITIS_LOOP_138_3_VITIS_LOOP_139_4  |       64|       64|         2|          1|          1|    64|       yes|
+        +-------------------------------------+---------+---------+----------+-----------+-----------+------+----------+
+
+
+
+================================================================
+== Utilization Estimates
+================================================================
+* Summary: 
++-----------------+---------+------+--------+--------+-----+
+|       Name      | BRAM_18K|  DSP |   FF   |   LUT  | URAM|
++-----------------+---------+------+--------+--------+-----+
+|DSP              |        -|     -|       -|       -|    -|
+|Expression       |        -|     -|       0|      75|    -|
+|FIFO             |        -|     -|       -|       -|    -|
+|Instance         |        -|     -|       -|       -|    -|
+|Memory           |        -|     -|       -|       -|    -|
+|Multiplexer      |        -|     -|       0|      63|    -|
+|Register         |        -|     -|      18|       -|    -|
++-----------------+---------+------+--------+--------+-----+
+|Total            |        0|     0|      18|     138|    0|
++-----------------+---------+------+--------+--------+-----+
+|Available        |      288|  1248|  234240|  117120|   64|
++-----------------+---------+------+--------+--------+-----+
+|Utilization (%)  |        0|     0|      ~0|      ~0|    0|
++-----------------+---------+------+--------+--------+-----+
+
++ Detail: 
+    * Instance: 
+    N/A
+
+    * DSP: 
+    N/A
+
+    * Memory: 
+    N/A
+
+    * FIFO: 
+    N/A
+
+    * Expression: 
+    +---------------------------+----------+----+---+----+------------+------------+
+    |       Variable Name       | Operation| DSP| FF| LUT| Bitwidth P0| Bitwidth P1|
+    +---------------------------+----------+----+---+----+------------+------------+
+    |add_ln138_1_fu_156_p2      |         +|   0|  0|  14|           7|           1|
+    |add_ln138_fu_173_p2        |         +|   0|  0|  12|           5|           1|
+    |add_ln139_fu_223_p2        |         +|   0|  0|  10|           3|           1|
+    |ap_block_pp0_stage0_11001  |       and|   0|  0|   2|           1|           1|
+    |icmp_ln138_fu_150_p2       |      icmp|   0|  0|  15|           7|           8|
+    |icmp_ln139_fu_179_p2       |      icmp|   0|  0|  12|           3|           4|
+    |select_ln138_1_fu_193_p3   |    select|   0|  0|   5|           1|           5|
+    |select_ln138_fu_185_p3     |    select|   0|  0|   3|           1|           1|
+    |ap_enable_pp0              |       xor|   0|  0|   2|           1|           2|
+    +---------------------------+----------+----+---+----+------------+------------+
+    |Total                      |          |   0|  0|  75|          29|          24|
+    +---------------------------+----------+----+---+----+------------+------------+
+
+    * Multiplexer: 
+    +---------------------------------------+----+-----------+-----+-----------+
+    |                  Name                 | LUT| Input Size| Bits| Total Bits|
+    +---------------------------------------+----+-----------+-----+-----------+
+    |ap_done_int                            |   9|          2|    1|          2|
+    |ap_enable_reg_pp0_iter1                |   9|          2|    1|          2|
+    |ap_sig_allocacmp_indvar_flatten6_load  |   9|          2|    7|         14|
+    |indvar_flatten6_fu_66                  |   9|          2|    7|         14|
+    |o_fu_62                                |   9|          2|    5|         10|
+    |p_fu_58                                |   9|          2|    3|          6|
+    |s_b3_blk_n                             |   9|          2|    1|          2|
+    +---------------------------------------+----+-----------+-----+-----------+
+    |Total                                  |  63|         14|   25|         50|
+    +---------------------------------------+----+-----------+-----+-----------+
+
+    * Register: 
+    +-------------------------+---+----+-----+-----------+
+    |           Name          | FF| LUT| Bits| Const Bits|
+    +-------------------------+---+----+-----+-----------+
+    |ap_CS_fsm                |  1|   0|    1|          0|
+    |ap_done_reg              |  1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter1  |  1|   0|    1|          0|
+    |indvar_flatten6_fu_66    |  7|   0|    7|          0|
+    |o_fu_62                  |  5|   0|    5|          0|
+    |p_fu_58                  |  3|   0|    3|          0|
+    +-------------------------+---+----+-----+-----------+
+    |Total                    | 18|   0|   18|          0|
+    +-------------------------+---+----+-----+-----------+
+
+
+
+================================================================
+== Interface
+================================================================
+* Summary: 
++-----------------------------------------------------------------------------------------+-----+-----+------------+--------------------------------------------------------------------------------+--------------+
+|                                        RTL Ports                                        | Dir | Bits|  Protocol  |                                  Source Object                                 |    C Type    |
++-----------------------------------------------------------------------------------------+-----+-----+------------+--------------------------------------------------------------------------------+--------------+
+|ap_clk                                                                                   |   in|    1|  ap_ctrl_hs|   compute_unit_1d_emitlast_general.5_Pipeline_VITIS_LOOP_138_3_VITIS_LOOP_139_4|  return value|
+|ap_rst                                                                                   |   in|    1|  ap_ctrl_hs|   compute_unit_1d_emitlast_general.5_Pipeline_VITIS_LOOP_138_3_VITIS_LOOP_139_4|  return value|
+|ap_start                                                                                 |   in|    1|  ap_ctrl_hs|   compute_unit_1d_emitlast_general.5_Pipeline_VITIS_LOOP_138_3_VITIS_LOOP_139_4|  return value|
+|ap_done                                                                                  |  out|    1|  ap_ctrl_hs|   compute_unit_1d_emitlast_general.5_Pipeline_VITIS_LOOP_138_3_VITIS_LOOP_139_4|  return value|
+|ap_idle                                                                                  |  out|    1|  ap_ctrl_hs|   compute_unit_1d_emitlast_general.5_Pipeline_VITIS_LOOP_138_3_VITIS_LOOP_139_4|  return value|
+|ap_ready                                                                                 |  out|    1|  ap_ctrl_hs|   compute_unit_1d_emitlast_general.5_Pipeline_VITIS_LOOP_138_3_VITIS_LOOP_139_4|  return value|
+|s_b3_dout                                                                                |   in|   32|     ap_fifo|                                                                            s_b3|       pointer|
+|s_b3_empty_n                                                                             |   in|    1|     ap_fifo|                                                                            s_b3|       pointer|
+|s_b3_read                                                                                |  out|    1|     ap_fifo|                                                                            s_b3|       pointer|
+|s_b3_num_data_valid                                                                      |   in|    3|     ap_fifo|                                                                            s_b3|       pointer|
+|s_b3_fifo_cap                                                                            |   in|    3|     ap_fifo|                                                                            s_b3|       pointer|
+|void_compute_unit_1d_emitlast_general_stream_stream_stream_stream_stream_un_63_address0  |  out|    4|   ap_memory|  void_compute_unit_1d_emitlast_general_stream_stream_stream_stream_stream_un_63|         array|
+|void_compute_unit_1d_emitlast_general_stream_stream_stream_stream_stream_un_63_ce0       |  out|    1|   ap_memory|  void_compute_unit_1d_emitlast_general_stream_stream_stream_stream_stream_un_63|         array|
+|void_compute_unit_1d_emitlast_general_stream_stream_stream_stream_stream_un_63_we0       |  out|    1|   ap_memory|  void_compute_unit_1d_emitlast_general_stream_stream_stream_stream_stream_un_63|         array|
+|void_compute_unit_1d_emitlast_general_stream_stream_stream_stream_stream_un_63_d0        |  out|   32|   ap_memory|  void_compute_unit_1d_emitlast_general_stream_stream_stream_stream_stream_un_63|         array|
+|void_compute_unit_1d_emitlast_general_stream_stream_stream_stream_stream_un_62_address0  |  out|    4|   ap_memory|  void_compute_unit_1d_emitlast_general_stream_stream_stream_stream_stream_un_62|         array|
+|void_compute_unit_1d_emitlast_general_stream_stream_stream_stream_stream_un_62_ce0       |  out|    1|   ap_memory|  void_compute_unit_1d_emitlast_general_stream_stream_stream_stream_stream_un_62|         array|
+|void_compute_unit_1d_emitlast_general_stream_stream_stream_stream_stream_un_62_we0       |  out|    1|   ap_memory|  void_compute_unit_1d_emitlast_general_stream_stream_stream_stream_stream_un_62|         array|
+|void_compute_unit_1d_emitlast_general_stream_stream_stream_stream_stream_un_62_d0        |  out|   32|   ap_memory|  void_compute_unit_1d_emitlast_general_stream_stream_stream_stream_stream_un_62|         array|
+|void_compute_unit_1d_emitlast_general_stream_stream_stream_stream_stream_un_61_address0  |  out|    4|   ap_memory|  void_compute_unit_1d_emitlast_general_stream_stream_stream_stream_stream_un_61|         array|
+|void_compute_unit_1d_emitlast_general_stream_stream_stream_stream_stream_un_61_ce0       |  out|    1|   ap_memory|  void_compute_unit_1d_emitlast_general_stream_stream_stream_stream_stream_un_61|         array|
+|void_compute_unit_1d_emitlast_general_stream_stream_stream_stream_stream_un_61_we0       |  out|    1|   ap_memory|  void_compute_unit_1d_emitlast_general_stream_stream_stream_stream_stream_un_61|         array|
+|void_compute_unit_1d_emitlast_general_stream_stream_stream_stream_stream_un_61_d0        |  out|   32|   ap_memory|  void_compute_unit_1d_emitlast_general_stream_stream_stream_stream_stream_un_61|         array|
+|void_compute_unit_1d_emitlast_general_stream_stream_stream_stream_stream_un_60_address0  |  out|    4|   ap_memory|  void_compute_unit_1d_emitlast_general_stream_stream_stream_stream_stream_un_60|         array|
+|void_compute_unit_1d_emitlast_general_stream_stream_stream_stream_stream_un_60_ce0       |  out|    1|   ap_memory|  void_compute_unit_1d_emitlast_general_stream_stream_stream_stream_stream_un_60|         array|
+|void_compute_unit_1d_emitlast_general_stream_stream_stream_stream_stream_un_60_we0       |  out|    1|   ap_memory|  void_compute_unit_1d_emitlast_general_stream_stream_stream_stream_stream_un_60|         array|
+|void_compute_unit_1d_emitlast_general_stream_stream_stream_stream_stream_un_60_d0        |  out|   32|   ap_memory|  void_compute_unit_1d_emitlast_general_stream_stream_stream_stream_stream_un_60|         array|
++-----------------------------------------------------------------------------------------+-----+-----+------------+--------------------------------------------------------------------------------+--------------+
+
