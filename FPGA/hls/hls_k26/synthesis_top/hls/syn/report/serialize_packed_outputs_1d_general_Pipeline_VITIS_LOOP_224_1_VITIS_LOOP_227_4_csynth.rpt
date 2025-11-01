@@ -1,0 +1,151 @@
+
+
+================================================================
+== Vitis HLS Report for 'serialize_packed_outputs_1d_general_Pipeline_VITIS_LOOP_224_1_VITIS_LOOP_227_4'
+================================================================
+* Date:           Thu Oct 29 19:08:27 2026
+
+* Version:        2025.2 (Build 6295257 on Nov 12 2025)
+* Project:        synthesis_top
+* Solution:       hls (Vivado IP Flow Target)
+* Product family: zynquplus
+* Target device:  xck26-sfvc784-2LV-c
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing: 
+    * Summary: 
+    +--------+----------+----------+------------+
+    |  Clock |  Target  | Estimated| Uncertainty|
+    +--------+----------+----------+------------+
+    |ap_clk  |  10.00 ns|  4.417 ns|     2.70 ns|
+    +--------+----------+----------+------------+
+
++ Latency: 
+    * Summary: 
+    +---------+-------------+-----------+-------------+-----+-----+-------------------+
+    |    Latency (cycles)   |    Latency (absolute)   |  Interval |      Pipeline     |
+    |   min   |     max     |    min    |     max     | min | max |        Type       |
+    +---------+-------------+-----------+-------------+-----+-----+-------------------+
+    |        2|  17179869182|  20.000 ns|  171.799 sec|    0|    0|  loop pipeline stp|
+    +---------+-------------+-----------+-------------+-----+-----+-------------------+
+
+    + Detail: 
+        * Instance: 
+        N/A
+
+        * Loop: 
+        +-------------------------------------+---------+-------------+----------+-----------+-----------+-----------------+----------+
+        |                                     |    Latency (cycles)   | Iteration|  Initiation Interval  |       Trip      |          |
+        |              Loop Name              |   min   |     max     |  Latency |  achieved |   target  |      Count      | Pipelined|
+        +-------------------------------------+---------+-------------+----------+-----------+-----------+-----------------+----------+
+        |- VITIS_LOOP_224_1_VITIS_LOOP_227_4  |        0|  17179869180|         2|          1|          1|  0 ~ 17179869180|       yes|
+        +-------------------------------------+---------+-------------+----------+-----------+-----------+-----------------+----------+
+
+
+
+================================================================
+== Utilization Estimates
+================================================================
+* Summary: 
++-----------------+---------+------+--------+--------+-----+
+|       Name      | BRAM_18K|  DSP |   FF   |   LUT  | URAM|
++-----------------+---------+------+--------+--------+-----+
+|DSP              |        -|     -|       -|       -|    -|
+|Expression       |        -|     -|       0|      88|    -|
+|FIFO             |        -|     -|       -|       -|    -|
+|Instance         |        -|     -|       -|       -|    -|
+|Memory           |        -|     -|       -|       -|    -|
+|Multiplexer      |        -|     -|       0|      54|    -|
+|Register         |        -|     -|      38|       -|    -|
++-----------------+---------+------+--------+--------+-----+
+|Total            |        0|     0|      38|     142|    0|
++-----------------+---------+------+--------+--------+-----+
+|Available        |      288|  1248|  234240|  117120|   64|
++-----------------+---------+------+--------+--------+-----+
+|Utilization (%)  |        0|     0|      ~0|      ~0|    0|
++-----------------+---------+------+--------+--------+-----+
+
++ Detail: 
+    * Instance: 
+    N/A
+
+    * DSP: 
+    N/A
+
+    * Memory: 
+    N/A
+
+    * FIFO: 
+    N/A
+
+    * Expression: 
+    +---------------------------------------+----------+----+---+----+------------+------------+
+    |             Variable Name             | Operation| DSP| FF| LUT| Bitwidth P0| Bitwidth P1|
+    +---------------------------------------+----------+----+---+----+------------+------------+
+    |add_ln224_fu_77_p2                     |         +|   0|  0|  41|          34|           1|
+    |ap_block_pp0_stage0_01001_grp1         |       and|   0|  0|   2|           1|           1|
+    |icmp_ln224_fu_72_p2                    |      icmp|   0|  0|  41|          34|          34|
+    |ap_block_state3_pp0_stage0_iter2_grp1  |        or|   0|  0|   2|           1|           1|
+    |ap_enable_pp0                          |       xor|   0|  0|   2|           1|           2|
+    +---------------------------------------+----------+----+---+----+------------+------------+
+    |Total                                  |          |   0|  0|  88|          71|          39|
+    +---------------------------------------+----------+----+---+----+------------+------------+
+
+    * Multiplexer: 
+    +-------------------------+----+-----------+-----+-----------+
+    |           Name          | LUT| Input Size| Bits| Total Bits|
+    +-------------------------+----+-----------+-----+-----------+
+    |ap_done_int              |   9|          2|    1|          2|
+    |ap_enable_reg_pp0_iter1  |   9|          2|    1|          2|
+    |ap_enable_reg_pp0_iter2  |   9|          2|    1|          2|
+    |indvar_flatten_fu_40     |   9|          2|   34|         68|
+    |out_vec_s_4_blk_n        |   9|          2|    1|          2|
+    |s_l7_conv_blk_n          |   9|          2|    1|          2|
+    +-------------------------+----+-----------+-----+-----------+
+    |Total                    |  54|         12|   39|         78|
+    +-------------------------+----+-----------+-----+-----------+
+
+    * Register: 
+    +-------------------------+----+----+-----+-----------+
+    |           Name          | FF | LUT| Bits| Const Bits|
+    +-------------------------+----+----+-----+-----------+
+    |ap_CS_fsm                |   1|   0|    1|          0|
+    |ap_done_reg              |   1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter1  |   1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter2  |   1|   0|    1|          0|
+    |indvar_flatten_fu_40     |  34|   0|   34|          0|
+    +-------------------------+----+----+-----+-----------+
+    |Total                    |  38|   0|   38|          0|
+    +-------------------------+----+----+-----+-----------+
+
+
+
+================================================================
+== Interface
+================================================================
+* Summary: 
++----------------------------+-----+-----+------------+--------------------------------------------------------------------------------+--------------+
+|          RTL Ports         | Dir | Bits|  Protocol  |                                  Source Object                                 |    C Type    |
++----------------------------+-----+-----+------------+--------------------------------------------------------------------------------+--------------+
+|ap_clk                      |   in|    1|  ap_ctrl_hs|  serialize_packed_outputs_1d_general_Pipeline_VITIS_LOOP_224_1_VITIS_LOOP_227_4|  return value|
+|ap_rst                      |   in|    1|  ap_ctrl_hs|  serialize_packed_outputs_1d_general_Pipeline_VITIS_LOOP_224_1_VITIS_LOOP_227_4|  return value|
+|ap_start                    |   in|    1|  ap_ctrl_hs|  serialize_packed_outputs_1d_general_Pipeline_VITIS_LOOP_224_1_VITIS_LOOP_227_4|  return value|
+|ap_done                     |  out|    1|  ap_ctrl_hs|  serialize_packed_outputs_1d_general_Pipeline_VITIS_LOOP_224_1_VITIS_LOOP_227_4|  return value|
+|ap_idle                     |  out|    1|  ap_ctrl_hs|  serialize_packed_outputs_1d_general_Pipeline_VITIS_LOOP_224_1_VITIS_LOOP_227_4|  return value|
+|ap_ready                    |  out|    1|  ap_ctrl_hs|  serialize_packed_outputs_1d_general_Pipeline_VITIS_LOOP_224_1_VITIS_LOOP_227_4|  return value|
+|out_vec_s_4_dout            |   in|    8|     ap_fifo|                                                                     out_vec_s_4|       pointer|
+|out_vec_s_4_empty_n         |   in|    1|     ap_fifo|                                                                     out_vec_s_4|       pointer|
+|out_vec_s_4_read            |  out|    1|     ap_fifo|                                                                     out_vec_s_4|       pointer|
+|out_vec_s_4_num_data_valid  |   in|    8|     ap_fifo|                                                                     out_vec_s_4|       pointer|
+|out_vec_s_4_fifo_cap        |   in|    8|     ap_fifo|                                                                     out_vec_s_4|       pointer|
+|s_l7_conv_din               |  out|    8|     ap_fifo|                                                                       s_l7_conv|       pointer|
+|s_l7_conv_full_n            |   in|    1|     ap_fifo|                                                                       s_l7_conv|       pointer|
+|s_l7_conv_write             |  out|    1|     ap_fifo|                                                                       s_l7_conv|       pointer|
+|s_l7_conv_num_data_valid    |   in|    5|     ap_fifo|                                                                       s_l7_conv|       pointer|
+|s_l7_conv_fifo_cap          |   in|    5|     ap_fifo|                                                                       s_l7_conv|       pointer|
+|tmp                         |   in|   34|     ap_none|                                                                             tmp|        scalar|
++----------------------------+-----+-----+------------+--------------------------------------------------------------------------------+--------------+
+
