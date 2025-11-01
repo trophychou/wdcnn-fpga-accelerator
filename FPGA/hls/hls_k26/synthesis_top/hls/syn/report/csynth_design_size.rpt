@@ -1,0 +1,105 @@
+================================================================
+== Design Size Report
+================================================================
+
+* Total Instructions per Compilation Phase
++---------------+----------------------------+--------------+----------------------------------------------------------------------------------------+
+| Phase         | Step                       | Instructions | Description                                                                            |
++---------------+----------------------------+--------------+----------------------------------------------------------------------------------------+
+| Compile/Link  |                            | 22,084       | After all functions are compiled and linked into a single design                       |
+|               |                            |              |                                                                                        |
+| Unroll/Inline |                            |              | After user unroll and inline pragmas are applied                                       |
+|               | (1) unroll                 |  4,040       | user unroll pragmas are applied                                                        |
+|               | (2) simplification         |  2,895       | simplification of applied user unroll pragmas                                          |
+|               | (3) inline                 |  2,829       | user inline pragmas are applied                                                        |
+|               | (4) simplification         |  2,775       | simplification of applied user inline pragmas                                          |
+|               |                            |              |                                                                                        |
+| Array/Struct  |                            |              | After user array partition and struct aggregate/disaggregate pragmas are applied       |
+|               | (1) array partition        |  3,628       | user array partition pragmas are applied                                               |
+|               | (2) simplification         |  3,104       | simplification of applied user array partition & struct aggregate/disaggregate pragmas |
+|               | (3) aggregate/disaggregate |  3,104       | user struct aggregate/disaggregate pragmas are applied                                 |
+|               | (4) array reshape          |  3,104       | apply array reshape pragmas                                                            |
+|               | (5) access patterns        |  3,247       | array access pattern optmizations                                                      |
+|               |                            |              |                                                                                        |
+| Performance   |                            |              | After transformations are applied to meet performance pragma targets                   |
+|               | (1) loop simplification    |  3,246       | loop and instruction simplification                                                    |
+|               | (2) parallelization        |  3,214       | loops are unrolled or pipelined to meet performance targets                            |
+|               | (3) array partition        |  3,184       | arrays are partitioned to meet performance targets                                     |
+|               | (4) simplification         |  3,184       | simplification of design after performance transformations                             |
+|               |                            |              |                                                                                        |
+| HW Transforms |                            |              | After hardware transfomations                                                          |
+|               | (1) lowering               |  3,288       | initial conversion to HW specific instructions                                         |
+|               | (2) optimizations          |  3,968       | high level synthesis optimizations                                                     |
++---------------+----------------------------+--------------+----------------------------------------------------------------------------------------+
+
+* Instructions per Function for each Compilation Phase
++--------------------------------------+-------------------------------------+-----------------+----------------+----------------+----------------+----------------+
+| Function                             | Location                            | Compile/Link    | Unroll/Inline  | Array/Struct   | Performance    | HW Transforms  |
++--------------------------------------+-------------------------------------+-----------------+----------------+----------------+----------------+----------------+
+| + synthesis_top                      | synthesis_top.cpp:212               | 22,084          | 2,775          | 3,247          | 3,184          | 3,968          |
+|  + load_weights_wrapper              | synthesis_top.cpp:33                | 1,100           |  281           |  239           |  239           |  428           |
+|     layer_loader<8, 16, 32>          | synthesis_top.cpp:9                 | 1,092 (7 calls) |  273 (7 calls) |  231 (7 calls) |  231 (7 calls) |  420 (7 calls) |
+|  + compute_engine                    | synthesis_top.cpp:59                | 20,785          | 2,369          | 2,854          | 2,791          | 3,384          |
+|     axis_512_to_hls_stream_8<512...  | stream_utils.hpp:9                  |   231           |   51           |   52           |   43           |   38           |
+|     stream_width_adjust_flex<8, ...  | stream_utils.hpp:104                |   700           |   16           |   16           |   15           |   24           |
+|   + conv1_accelerator_specialize...  | conv1_specialized.hpp:25            | 1,251           |  244           |  396           |  378           |  420           |
+|    + apply_activation<1U, 64, 8>     | activation_utils.hpp:67             |   143           |                |                |                |                |
+|       relu_act<64, 8>                | activation_utils.hpp:24             |   138           |                |                |                |                |
+|     pool_accelerator<1U, 723U, 1...  | pool_accelerator.hpp:10             |   347           |   37           |   39           |   42           |   53           |
+|     stream_width_adjust_flex<8, ...  | stream_utils.hpp:104                |   747           |   20           |   20           |   19           |   34           |
+|   + general_1d_conv_accelerator<...  | general_1d_conv_accelerator.hpp:249 | 1,885           |  266           |  298           |  298           |  378           |
+|      sliding_window_1d_general<1U... | general_1d_conv_accelerator.hpp:16  |   241           |   50           |   47           |   50           |   66           |
+|    + compute_unit_1d_emitlast_gen... | general_1d_conv_accelerator.hpp:104 | 1,502           |  182           |  217           |  215           |  264           |
+|     + apply_activation<1U, 64, 8>    | activation_utils.hpp:67             |   143           |                |                |                |                |
+|        relu_act<64, 8>               | activation_utils.hpp:24             |   138           |                |                |                |                |
+|      serialize_packed_outputs_1d_... | general_1d_conv_accelerator.hpp:217 |   122           |   28           |   28           |   27           |   42           |
+|     pool_accelerator<1U, 361U, 3...  | pool_accelerator.hpp:10             |   347           |   37           |   39           |   42           |   53           |
+|     stream_width_adjust_flex<8, ...  | stream_utils.hpp:104                | 1,494 (2 calls) |   40 (2 calls) |   40 (2 calls) |   38 (2 calls) |   68 (2 calls) |
+|   + general_1d_conv_accelerator<...  | general_1d_conv_accelerator.hpp:249 | 1,883           |  352           |  429           |  429           |  509           |
+|      sliding_window_1d_general<1U... | general_1d_conv_accelerator.hpp:16  |   241           |   50           |   47           |   50           |   66           |
+|    + compute_unit_1d_emitlast_gen... | general_1d_conv_accelerator.hpp:104 | 1,500           |  268           |  348           |  346           |  395           |
+|     + apply_activation<1U, 64, 8>    | activation_utils.hpp:67             |   143           |                |                |                |                |
+|        relu_act<64, 8>               | activation_utils.hpp:24             |   138           |                |                |                |                |
+|      serialize_packed_outputs_1d_... | general_1d_conv_accelerator.hpp:217 |   122           |   28           |   28           |   27           |   42           |
+|     pool_accelerator<1U, 180U, 6...  | pool_accelerator.hpp:10             |   347           |   37           |   39           |   42           |   53           |
+|   + general_1d_conv_accelerator<...  | general_1d_conv_accelerator.hpp:249 | 1,883           |  352           |  429           |  429           |  509           |
+|      sliding_window_1d_general<1U... | general_1d_conv_accelerator.hpp:16  |   241           |   50           |   47           |   50           |   66           |
+|    + compute_unit_1d_emitlast_gen... | general_1d_conv_accelerator.hpp:104 | 1,500           |  268           |  348           |  346           |  395           |
+|     + apply_activation<1U, 64, 8>    | activation_utils.hpp:67             |   143           |                |                |                |                |
+|        relu_act<64, 8>               | activation_utils.hpp:24             |   138           |                |                |                |                |
+|      serialize_packed_outputs_1d_... | general_1d_conv_accelerator.hpp:217 |   122           |   28           |   28           |   27           |   42           |
+|     pool_accelerator<1U, 90U, 64...  | pool_accelerator.hpp:10             |   347           |   37           |   39           |   42           |   53           |
+|     stream_width_adjust_flex<8, ...  | stream_utils.hpp:104                |   755           |   18           |   18           |   17           |   28           |
+|   + general_1d_conv_accelerator<...  | general_1d_conv_accelerator.hpp:249 | 1,889           |  308           |  385           |  385           |  461           |
+|      sliding_window_1d_general<1U... | general_1d_conv_accelerator.hpp:16  |   243           |   44           |   41           |   44           |   60           |
+|    + compute_unit_1d_emitlast_gen... | general_1d_conv_accelerator.hpp:104 | 1,504           |  230           |  310           |  308           |  353           |
+|     + apply_activation<1U, 64, 8>    | activation_utils.hpp:67             |   143           |                |                |                |                |
+|        relu_act<64, 8>               | activation_utils.hpp:24             |   138           |                |                |                |                |
+|      serialize_packed_outputs_1d_... | general_1d_conv_accelerator.hpp:217 |   122           |   28           |   28           |   27           |   42           |
+|     pool_accelerator<1U, 43U, 64...  | pool_accelerator.hpp:10             |   347           |   37           |   39           |   42           |   53           |
+|     stream_width_adjust_flex<8, ...  | stream_utils.hpp:104                |   700           |   16           |   16           |   15           |   24           |
+|   + general_1d_conv_accelerator<...  | general_1d_conv_accelerator.hpp:249 | 1,873           |  197           |  223           |  219           |  280           |
+|      sliding_window_1d_general<1U... | general_1d_conv_accelerator.hpp:16  |   243           |   25           |   16           |   15           |   24           |
+|    + compute_unit_1d_emitlast_gen... | general_1d_conv_accelerator.hpp:104 | 1,488           |  143           |  178           |  176           |  216           |
+|     + apply_activation<1U, 64, 8>    | activation_utils.hpp:67             |   143           |                |                |                |                |
+|        relu_act<64, 8>               | activation_utils.hpp:24             |   138           |                |                |                |                |
+|      serialize_packed_outputs_1d_... | general_1d_conv_accelerator.hpp:217 |   122           |   23           |   23           |   22           |   34           |
+|     stream_width_adjust_flex<8, ...  | stream_utils.hpp:104                |   700           |   16           |   16           |   15           |   24           |
+|   + general_1d_conv_accelerator<...  | general_1d_conv_accelerator.hpp:249 | 1,856           |  144           |  137           |  133           |  182           |
+|      sliding_window_1d_general<1U... | general_1d_conv_accelerator.hpp:16  |   243           |   25           |   16           |   15           |   24           |
+|    + compute_unit_1d_emitlast_gen... | general_1d_conv_accelerator.hpp:104 | 1,472           |   96           |   98           |   96           |  127           |
+|     + apply_activation<0U, 64, 8>    | activation_utils.hpp:67             |   143           |                |                |                |                |
+|        saturate_int8_act<64, 8>      | activation_utils.hpp:11             |   138           |                |                |                |                |
+|      serialize_packed_outputs_1d_... | general_1d_conv_accelerator.hpp:217 |   121           |   17           |   17           |   16           |   25           |
+|     stream_width_adjust_flex<8, ...  | stream_utils.hpp:104                |   747           |   15           |   15           |   14           |   26           |
+|     hls_stream_to_axis<32, 1>        | stream_utils.hpp:30                 |   265           |   43           |   83           |   48           |   26           |
++--------------------------------------+-------------------------------------+-----------------+----------------+----------------+----------------+----------------+
+
+* Design Size Message Settings
++---------------------------------------------+--------+------------------------------------------------------------------+
+| Message Setting                             | Value  | Description                                                      |
++---------------------------------------------+--------+------------------------------------------------------------------+
+| config_compile -design_size_maximum_warning | 100000 | Show a warning when total design instructions exceeds this value |
++---------------------------------------------+--------+------------------------------------------------------------------+
+
+
