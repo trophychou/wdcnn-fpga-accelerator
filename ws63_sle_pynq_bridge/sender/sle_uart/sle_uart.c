@@ -2,9 +2,9 @@
  * Copyright (c) HiSilicon (Shanghai) Technologies Co., Ltd. 2023-2026. All rights reserved.
  *
  * @if Eng
- * @brief Provides the entry and UART bridge tasks for the SLE UART sample.
+ * @brief Provides SLE UART tasks and streams preset CSV data from Server builds.
  * @else
- * @brief 提供 SLE UART 案例入口及串口桥接任务。
+ * @brief 提供 SLE UART 任务，并在 Server 构建中发送预置 CSV 数据。
  * @endif
  *
  * History: \n
