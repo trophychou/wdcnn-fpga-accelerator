@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Receive simulated SLE CSV frames forwarded through the H3863 Client UART."""
+"""Receive H3863 telemetry over serial, log CSV frames, and track per-device loss."""
 
 import argparse
 import csv
