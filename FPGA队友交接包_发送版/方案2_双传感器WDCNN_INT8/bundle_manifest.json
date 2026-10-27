@@ -1,0 +1,90 @@
+{
+  "status": "prototype_only_not_full_data_deployment_model",
+  "fold": 1,
+  "testbench_vectors_per_branch": 4,
+  "branches": [
+    {
+      "branch": "vibration",
+      "graph_sha256": "ed532bcc9eca48602493972d86c98f7a4cc76a4ff54153429ee7d3b1278aa632"
+    },
+    {
+      "branch": "current",
+      "graph_sha256": "f3b4a02c998fa110aaf2bb052dde843582b8e0757c8104e453945175fc7bc2f1"
+    }
+  ],
+  "file_inventory": {
+    "prototype_fold01/current/fpga_binary/biases_int32_le.bin": {
+      "bytes": 1372,
+      "sha256": "12d2451aa1fa4b6caea0edaabdc39967c7c61a2bff1e548f9d68a80062333086"
+    },
+    "prototype_fold01/current/fpga_binary/fc2_output_int8.bin": {
+      "bytes": 12,
+      "sha256": "99c0d461bfd12a6405a1f9e21504d9cc0d74453485567c4bd855beca9ca5c08e"
+    },
+    "prototype_fold01/current/fpga_binary/input_int8.bin": {
+      "bytes": 40960,
+      "sha256": "9dcc9d25916183386638d3970ae9676104bb324b60cf14fed6b4d2206f30c90a"
+    },
+    "prototype_fold01/current/fpga_binary/manifest.json": {
+      "bytes": 6920,
+      "sha256": "0d9e48682398e94e0a3fe718b80ab6935a511d7c449a39c283d08b06f7fa0ffc"
+    },
+    "prototype_fold01/current/fpga_binary/multipliers_int32_le.bin": {
+      "bytes": 1372,
+      "sha256": "6229c5d7a942f8f6bff68c930c7dfbc7ff6bf23162bba50687ca006d4d26fb13"
+    },
+    "prototype_fold01/current/fpga_binary/shifts_int32_le.bin": {
+      "bytes": 1372,
+      "sha256": "20366f66d041be5f3fbb4d5e7a9600812f641f51e2e74db93c5518232f107e71"
+    },
+    "prototype_fold01/current/fpga_binary/weights_int8.bin": {
+      "bytes": 169004,
+      "sha256": "1994c52335f7dabc6cc9d70a6117361a4450831acda89872d71de5729dddec30"
+    },
+    "prototype_fold01/current/graph.json": {
+      "bytes": 3901,
+      "sha256": "f3b4a02c998fa110aaf2bb052dde843582b8e0757c8104e453945175fc7bc2f1"
+    },
+    "prototype_fold01/vibration/fpga_binary/biases_int32_le.bin": {
+      "bytes": 1372,
+      "sha256": "6deaf9a509678050837c10b9d96395f22ed342e97aac39d172f5856d4657ab75"
+    },
+    "prototype_fold01/vibration/fpga_binary/fc2_output_int8.bin": {
+      "bytes": 12,
+      "sha256": "5ff88b64a355d35b25c259f1cd9b015fd92661eb006497e91baa612642980ce1"
+    },
+    "prototype_fold01/vibration/fpga_binary/input_int8.bin": {
+      "bytes": 102400,
+      "sha256": "3569876c24aae5b60db73fcaae066d9965f725d646e8d1f27c8b6b611a39b99d"
+    },
+    "prototype_fold01/vibration/fpga_binary/manifest.json": {
+      "bytes": 6921,
+      "sha256": "f869b6d215d5caf1706963afd926d848da1f064a30eb7152ca9c7833628b2d0d"
+    },
+    "prototype_fold01/vibration/fpga_binary/multipliers_int32_le.bin": {
+      "bytes": 1372,
+      "sha256": "304b07a49d5db6722c9fcd377e4462dc84ddf5a22169b8e1761604f92924889c"
+    },
+    "prototype_fold01/vibration/fpga_binary/shifts_int32_le.bin": {
+      "bytes": 1372,
+      "sha256": "3c89d29d9cb12bdccf683eccf82024163e034bc1e85384cc135f9aae6072c318"
+    },
+    "prototype_fold01/vibration/fpga_binary/weights_int8.bin": {
+      "bytes": 172076,
+      "sha256": "a3bbd5524707860f2cf4b6ed80de28c8a0d5d946f5f253cfe4ee819519ff6bcb"
+    },
+    "prototype_fold01/vibration/graph.json": {
+      "bytes": 3877,
+      "sha256": "ed532bcc9eca48602493972d86c98f7a4cc76a4ff54153429ee7d3b1278aa632"
+    }
+  },
+  "contract_sha256": "29b55a27890225e5afd6c814ae80edf25ca12e68ba497b8f8e08e24e8affc362",
+  "postprocess_contract_sha256": "fdfd3f9cf3ac847228de17ffc6aebfb95f5c0729acc8ea4af9306d4606ea26e3",
+  "host_cpp_test_result_sha256": "c515dc46b49dff03ca7d4a336ec30732646f99ceb67da7d50c1fdfb9fd8392be",
+  "hls_source_sha256": {
+    "run_hls.tcl": "42f56f7c89ba63d54a4a61141f73d62c72d0e8765d08fc957c8c6c42df4f8f1f",
+    "testbench.cpp": "262c2bfd9fb6266500988f6fb3e45e35d23053693f54cc05989637f8b8a7bd24",
+    "wdcnn_dual_top.cpp": "4b8070fd4f3fda6ca1cad189cbc2958bbd6663e4751902da0703ac1ff7905d72",
+    "wdcnn_dual_top.h": "674921515afc8a339ebac088f5236d9e7c7d8aa8b0e184b7e22e098132e58173"
+  }
+}

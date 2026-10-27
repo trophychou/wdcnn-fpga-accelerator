@@ -1,0 +1,283 @@
+{
+  "format": "C-order signed INT8 / little-endian signed INT32",
+  "model_graph_sha256": "f3b4a02c998fa110aaf2bb052dde843582b8e0757c8104e453945175fc7bc2f1",
+  "parameters_sha256": "cd43199904f510e72133cb44c486e96dae7329322ec993fb2d6f7404f551c786",
+  "layers": [
+    {
+      "name": "conv1",
+      "weight_layout": "OIK",
+      "weight_shape": [
+        16,
+        2,
+        64
+      ],
+      "weight": {
+        "file": "weights_int8.bin",
+        "offset_bytes": 0,
+        "bytes": 2048,
+        "elements": 2048,
+        "dtype": "i1"
+      },
+      "bias": {
+        "file": "biases_int32_le.bin",
+        "offset_bytes": 0,
+        "bytes": 64,
+        "elements": 16,
+        "dtype": "<i4"
+      },
+      "multiplier": {
+        "file": "multipliers_int32_le.bin",
+        "offset_bytes": 0,
+        "bytes": 64,
+        "elements": 16,
+        "dtype": "<i4"
+      },
+      "shift": {
+        "file": "shifts_int32_le.bin",
+        "offset_bytes": 0,
+        "bytes": 64,
+        "elements": 16,
+        "dtype": "<i4"
+      }
+    },
+    {
+      "name": "conv2",
+      "weight_layout": "OIK",
+      "weight_shape": [
+        32,
+        16,
+        3
+      ],
+      "weight": {
+        "file": "weights_int8.bin",
+        "offset_bytes": 2048,
+        "bytes": 1536,
+        "elements": 1536,
+        "dtype": "i1"
+      },
+      "bias": {
+        "file": "biases_int32_le.bin",
+        "offset_bytes": 64,
+        "bytes": 128,
+        "elements": 32,
+        "dtype": "<i4"
+      },
+      "multiplier": {
+        "file": "multipliers_int32_le.bin",
+        "offset_bytes": 64,
+        "bytes": 128,
+        "elements": 32,
+        "dtype": "<i4"
+      },
+      "shift": {
+        "file": "shifts_int32_le.bin",
+        "offset_bytes": 64,
+        "bytes": 128,
+        "elements": 32,
+        "dtype": "<i4"
+      }
+    },
+    {
+      "name": "conv3",
+      "weight_layout": "OIK",
+      "weight_shape": [
+        64,
+        32,
+        3
+      ],
+      "weight": {
+        "file": "weights_int8.bin",
+        "offset_bytes": 3584,
+        "bytes": 6144,
+        "elements": 6144,
+        "dtype": "i1"
+      },
+      "bias": {
+        "file": "biases_int32_le.bin",
+        "offset_bytes": 192,
+        "bytes": 256,
+        "elements": 64,
+        "dtype": "<i4"
+      },
+      "multiplier": {
+        "file": "multipliers_int32_le.bin",
+        "offset_bytes": 192,
+        "bytes": 256,
+        "elements": 64,
+        "dtype": "<i4"
+      },
+      "shift": {
+        "file": "shifts_int32_le.bin",
+        "offset_bytes": 192,
+        "bytes": 256,
+        "elements": 64,
+        "dtype": "<i4"
+      }
+    },
+    {
+      "name": "conv4",
+      "weight_layout": "OIK",
+      "weight_shape": [
+        64,
+        64,
+        3
+      ],
+      "weight": {
+        "file": "weights_int8.bin",
+        "offset_bytes": 9728,
+        "bytes": 12288,
+        "elements": 12288,
+        "dtype": "i1"
+      },
+      "bias": {
+        "file": "biases_int32_le.bin",
+        "offset_bytes": 448,
+        "bytes": 256,
+        "elements": 64,
+        "dtype": "<i4"
+      },
+      "multiplier": {
+        "file": "multipliers_int32_le.bin",
+        "offset_bytes": 448,
+        "bytes": 256,
+        "elements": 64,
+        "dtype": "<i4"
+      },
+      "shift": {
+        "file": "shifts_int32_le.bin",
+        "offset_bytes": 448,
+        "bytes": 256,
+        "elements": 64,
+        "dtype": "<i4"
+      }
+    },
+    {
+      "name": "conv5",
+      "weight_layout": "OIK",
+      "weight_shape": [
+        64,
+        64,
+        3
+      ],
+      "weight": {
+        "file": "weights_int8.bin",
+        "offset_bytes": 22016,
+        "bytes": 12288,
+        "elements": 12288,
+        "dtype": "i1"
+      },
+      "bias": {
+        "file": "biases_int32_le.bin",
+        "offset_bytes": 704,
+        "bytes": 256,
+        "elements": 64,
+        "dtype": "<i4"
+      },
+      "multiplier": {
+        "file": "multipliers_int32_le.bin",
+        "offset_bytes": 704,
+        "bytes": 256,
+        "elements": 64,
+        "dtype": "<i4"
+      },
+      "shift": {
+        "file": "shifts_int32_le.bin",
+        "offset_bytes": 704,
+        "bytes": 256,
+        "elements": 64,
+        "dtype": "<i4"
+      }
+    },
+    {
+      "name": "fc1",
+      "weight_layout": "OI",
+      "weight_shape": [
+        100,
+        1344
+      ],
+      "weight": {
+        "file": "weights_int8.bin",
+        "offset_bytes": 34304,
+        "bytes": 134400,
+        "elements": 134400,
+        "dtype": "i1"
+      },
+      "bias": {
+        "file": "biases_int32_le.bin",
+        "offset_bytes": 960,
+        "bytes": 400,
+        "elements": 100,
+        "dtype": "<i4"
+      },
+      "multiplier": {
+        "file": "multipliers_int32_le.bin",
+        "offset_bytes": 960,
+        "bytes": 400,
+        "elements": 100,
+        "dtype": "<i4"
+      },
+      "shift": {
+        "file": "shifts_int32_le.bin",
+        "offset_bytes": 960,
+        "bytes": 400,
+        "elements": 100,
+        "dtype": "<i4"
+      }
+    },
+    {
+      "name": "fc2",
+      "weight_layout": "OI",
+      "weight_shape": [
+        3,
+        100
+      ],
+      "weight": {
+        "file": "weights_int8.bin",
+        "offset_bytes": 168704,
+        "bytes": 300,
+        "elements": 300,
+        "dtype": "i1"
+      },
+      "bias": {
+        "file": "biases_int32_le.bin",
+        "offset_bytes": 1360,
+        "bytes": 12,
+        "elements": 3,
+        "dtype": "<i4"
+      },
+      "multiplier": {
+        "file": "multipliers_int32_le.bin",
+        "offset_bytes": 1360,
+        "bytes": 12,
+        "elements": 3,
+        "dtype": "<i4"
+      },
+      "shift": {
+        "file": "shifts_int32_le.bin",
+        "offset_bytes": 1360,
+        "bytes": 12,
+        "elements": 3,
+        "dtype": "<i4"
+      }
+    }
+  ],
+  "sha256": {
+    "weights_int8.bin": "1994c52335f7dabc6cc9d70a6117361a4450831acda89872d71de5729dddec30",
+    "biases_int32_le.bin": "12d2451aa1fa4b6caea0edaabdc39967c7c61a2bff1e548f9d68a80062333086",
+    "multipliers_int32_le.bin": "6229c5d7a942f8f6bff68c930c7dfbc7ff6bf23162bba50687ca006d4d26fb13",
+    "shifts_int32_le.bin": "20366f66d041be5f3fbb4d5e7a9600812f641f51e2e74db93c5518232f107e71",
+    "input_int8.bin": "9dcc9d25916183386638d3970ae9676104bb324b60cf14fed6b4d2206f30c90a",
+    "fc2_output_int8.bin": "99c0d461bfd12a6405a1f9e21504d9cc0d74453485567c4bd855beca9ca5c08e"
+  },
+  "golden_records": 4,
+  "golden_input_shape": [
+    4,
+    2,
+    5120
+  ],
+  "golden_output_shape": [
+    4,
+    3
+  ],
+  "note": "INT32 multipliers/shifts use INT64 intermediate multiply. Normalization/FFT/softmax/fusion remain outside integer network."
+}

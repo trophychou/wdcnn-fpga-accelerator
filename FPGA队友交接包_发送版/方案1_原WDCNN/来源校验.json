@@ -1,0 +1,152 @@
+[
+  {
+    "source": "wdcnn_xjty - 副本/wdcnn_xjty - 副本/output/wdcnn_relu.pth",
+    "destination": "原WDCNN/models/wdcnn_relu.pth",
+    "sha256": "362e592f3ab72e1367f1afeec402920de2917442ce08930e7d9cfd9a8b86580b"
+  },
+  {
+    "source": "wdcnn_xjty - 副本/wdcnn_xjty - 副本/model.json",
+    "destination": "原WDCNN/models/original_model_config.json",
+    "sha256": "14d7e830cb6a7875c26359993197dd83a5908d47d8d0f7c757f577c2b046a774"
+  },
+  {
+    "source": "wdcnn_xjty - 副本/wdcnn_xjty - 副本/quant_config.json",
+    "destination": "原WDCNN/models/quant_config.json",
+    "sha256": "13783e19ead830ce9c67cf4f3e119a62a7284c5fbfcdad07a3c72fbf5722b06d"
+  },
+  {
+    "source": "wdcnn_xjty - 副本/wdcnn_xjty - 副本/scripts/WDCNN_ReLU.py",
+    "destination": "原WDCNN/src/WDCNN_ReLU.py",
+    "sha256": "7cde71d0827942c1b3cf7a3807c2c152a0d978c9a80c043851b17ed0cea3d360"
+  },
+  {
+    "source": "wdcnn_xjty - 副本/wdcnn_xjty - 副本/data/XJTY_test_amp.csv",
+    "destination": "原WDCNN/data/XJTY_test_amp.csv",
+    "sha256": "ef21a4f46a6e334d64b3c97aa17a39852981686f9cdd06101a11e1c8bc4c3f75"
+  },
+  {
+    "source": "wdcnn_xjty - 副本/wdcnn_xjty - 副本/experiments/wdcnn_dsp360_shared/config.hpp",
+    "destination": "原WDCNN/hls/config.hpp",
+    "sha256": "8801fe39786387d5cf6cf547cc8822fe095de2d13f3fc9c369db38e7c4c26004"
+  },
+  {
+    "source": "wdcnn_xjty - 副本/wdcnn_xjty - 副本/experiments/wdcnn_dsp360_shared/synthesis_top.cpp",
+    "destination": "原WDCNN/hls/synthesis_top.cpp",
+    "sha256": "14c586634635d31ebd72e2fdc6bca9fd60f078f86713a39cbddd308fbe9e982e"
+  },
+  {
+    "source": "wdcnn_xjty - 副本/wdcnn_xjty - 副本/experiments/wdcnn_dsp360_shared/testbench.cpp",
+    "destination": "原WDCNN/hls/testbench.cpp",
+    "sha256": "aabef6897b57bf6bc9f3ccc4cec7f48354e0eb2c3be365262924bcd50b706f1c"
+  },
+  {
+    "source": "wdcnn_xjty - 副本/wdcnn_xjty - 副本/experiments/wdcnn_dsp360_shared/run_hls.tcl",
+    "destination": "原WDCNN/hls/run_hls.tcl",
+    "sha256": "4f2cb58ba2de7438845ffdca660e9c2abdb41acbbf816a6bfc0cf8512dce7208"
+  },
+  {
+    "source": "wdcnn_xjty - 副本/wdcnn_xjty - 副本/experiments/wdcnn_dsp360_shared/used_model_config.json",
+    "destination": "原WDCNN/hls/used_model_config.json",
+    "sha256": "63e8677256b0a4304b370413796eaf636254924d67afef0083d9bd94b56da7cf"
+  },
+  {
+    "source": "wdcnn_xjty - 副本/wdcnn_xjty - 副本/experiments/wdcnn_dsp360_shared/hw_lib/activation_utils.hpp",
+    "destination": "原WDCNN/hls/hw_lib/activation_utils.hpp",
+    "sha256": "d3b32f826187a86e3c1df504a2651ac8113ad59b8746727118e6f51a888e0538"
+  },
+  {
+    "source": "wdcnn_xjty - 副本/wdcnn_xjty - 副本/experiments/wdcnn_dsp360_shared/hw_lib/conv1_specialized.hpp",
+    "destination": "原WDCNN/hls/hw_lib/conv1_specialized.hpp",
+    "sha256": "e716c22ffb8a6c881cfbf20f789dd569e07e5c2276c20d19edcfa7a3338e968c"
+  },
+  {
+    "source": "wdcnn_xjty - 副本/wdcnn_xjty - 副本/experiments/wdcnn_dsp360_shared/hw_lib/general_1d_conv_accelerator.hpp",
+    "destination": "原WDCNN/hls/hw_lib/general_1d_conv_accelerator.hpp",
+    "sha256": "5fa5f34e8d0560299d7743895317cc74f4af0120fb3fce227abf8a94705a2faa"
+  },
+  {
+    "source": "wdcnn_xjty - 副本/wdcnn_xjty - 副本/experiments/wdcnn_dsp360_shared/hw_lib/pool_accelerator.hpp",
+    "destination": "原WDCNN/hls/hw_lib/pool_accelerator.hpp",
+    "sha256": "bda7817a46851656844c819920b77eb8c0a14d136ccba36e9eb22cc1c2ccf687"
+  },
+  {
+    "source": "wdcnn_xjty - 副本/wdcnn_xjty - 副本/experiments/wdcnn_dsp360_shared/hw_lib/readme.txt",
+    "destination": "原WDCNN/hls/hw_lib/readme.txt",
+    "sha256": "51f028c975d2d85f3965ffd058d8396c5e2881d66ba11825cff4a1fa647b2665"
+  },
+  {
+    "source": "wdcnn_xjty - 副本/wdcnn_xjty - 副本/experiments/wdcnn_dsp360_shared/hw_lib/stream_utils.hpp",
+    "destination": "原WDCNN/hls/hw_lib/stream_utils.hpp",
+    "sha256": "5493f3c12d35d6b839436791b00d0f4c16157bd00b5374065956d6fe5eed4771"
+  },
+  {
+    "source": "wdcnn_xjty - 副本/wdcnn_xjty - 副本/experiments/wdcnn_dsp360_shared/weights_csv/01_Conv1_b.csv",
+    "destination": "原WDCNN/hls/weights_csv/01_Conv1_b.csv",
+    "sha256": "3f4bfaa77433cb1425276f8807ee69186e64cfce1ab306e3f1d7e487237841f8"
+  },
+  {
+    "source": "wdcnn_xjty - 副本/wdcnn_xjty - 副本/experiments/wdcnn_dsp360_shared/weights_csv/01_Conv1_w.csv",
+    "destination": "原WDCNN/hls/weights_csv/01_Conv1_w.csv",
+    "sha256": "52b513190f5bb8de32e04ad75c943e29c41bb7f43a1fbbb5ef65dd39804e2be8"
+  },
+  {
+    "source": "wdcnn_xjty - 副本/wdcnn_xjty - 副本/experiments/wdcnn_dsp360_shared/weights_csv/02_Conv2_b.csv",
+    "destination": "原WDCNN/hls/weights_csv/02_Conv2_b.csv",
+    "sha256": "b844f44e6dba27134ed548407615dcf4ebe25378b924af49631f497845b5a8ee"
+  },
+  {
+    "source": "wdcnn_xjty - 副本/wdcnn_xjty - 副本/experiments/wdcnn_dsp360_shared/weights_csv/02_Conv2_w.csv",
+    "destination": "原WDCNN/hls/weights_csv/02_Conv2_w.csv",
+    "sha256": "0dc5e80d8e38897a272d6ab5b803c3112d77f77c3389c558f0794bdc74c3f089"
+  },
+  {
+    "source": "wdcnn_xjty - 副本/wdcnn_xjty - 副本/experiments/wdcnn_dsp360_shared/weights_csv/03_Conv3_b.csv",
+    "destination": "原WDCNN/hls/weights_csv/03_Conv3_b.csv",
+    "sha256": "eb28264aadd62ca7503c85463c1c1e15627fd1ac1128155bf42faf44b5f9a1c0"
+  },
+  {
+    "source": "wdcnn_xjty - 副本/wdcnn_xjty - 副本/experiments/wdcnn_dsp360_shared/weights_csv/03_Conv3_w.csv",
+    "destination": "原WDCNN/hls/weights_csv/03_Conv3_w.csv",
+    "sha256": "a06048d38749ec33bba0b10ace85145234e180f2a2676110019083b3694597b2"
+  },
+  {
+    "source": "wdcnn_xjty - 副本/wdcnn_xjty - 副本/experiments/wdcnn_dsp360_shared/weights_csv/04_Conv4_b.csv",
+    "destination": "原WDCNN/hls/weights_csv/04_Conv4_b.csv",
+    "sha256": "4cdf478250d8ffd0c2c6a1979643698c5d1478a431c8839896a4825a2fb8f9c1"
+  },
+  {
+    "source": "wdcnn_xjty - 副本/wdcnn_xjty - 副本/experiments/wdcnn_dsp360_shared/weights_csv/04_Conv4_w.csv",
+    "destination": "原WDCNN/hls/weights_csv/04_Conv4_w.csv",
+    "sha256": "2091ede5e6dd67628a964262d00bdcaa8ebb1c599935e11fa838f15a9e269886"
+  },
+  {
+    "source": "wdcnn_xjty - 副本/wdcnn_xjty - 副本/experiments/wdcnn_dsp360_shared/weights_csv/05_Conv5_b.csv",
+    "destination": "原WDCNN/hls/weights_csv/05_Conv5_b.csv",
+    "sha256": "026fe256bde09888cc4c2ae0167463e498bbcf039754814424349276f62cb7e4"
+  },
+  {
+    "source": "wdcnn_xjty - 副本/wdcnn_xjty - 副本/experiments/wdcnn_dsp360_shared/weights_csv/05_Conv5_w.csv",
+    "destination": "原WDCNN/hls/weights_csv/05_Conv5_w.csv",
+    "sha256": "d5ff4572351b9842d1f8fa153c31977e7c4798e416551ddc6b6033f7a0d3ffe0"
+  },
+  {
+    "source": "wdcnn_xjty - 副本/wdcnn_xjty - 副本/experiments/wdcnn_dsp360_shared/weights_csv/06_FC1_b.csv",
+    "destination": "原WDCNN/hls/weights_csv/06_FC1_b.csv",
+    "sha256": "a60fc2c35f02cf3606f9818e9ddf715250a27361e810c4d8dfc9cefd6765ca25"
+  },
+  {
+    "source": "wdcnn_xjty - 副本/wdcnn_xjty - 副本/experiments/wdcnn_dsp360_shared/weights_csv/06_FC1_w.csv",
+    "destination": "原WDCNN/hls/weights_csv/06_FC1_w.csv",
+    "sha256": "69335f573ad654c569a5f8887dee705ce21550736612de1bf7cd0328d786e5f5"
+  },
+  {
+    "source": "wdcnn_xjty - 副本/wdcnn_xjty - 副本/experiments/wdcnn_dsp360_shared/weights_csv/07_FC2_b.csv",
+    "destination": "原WDCNN/hls/weights_csv/07_FC2_b.csv",
+    "sha256": "dc7cb84bf4c8005bb74a675594d1146bb0a72a6ba247fad163d464cde70fbe6d"
+  },
+  {
+    "source": "wdcnn_xjty - 副本/wdcnn_xjty - 副本/experiments/wdcnn_dsp360_shared/weights_csv/07_FC2_w.csv",
+    "destination": "原WDCNN/hls/weights_csv/07_FC2_w.csv",
+    "sha256": "324d1978be8bd86bd6ab644a111ad8a0e23aec16c760117d8dba768217e24613"
+  }
+]

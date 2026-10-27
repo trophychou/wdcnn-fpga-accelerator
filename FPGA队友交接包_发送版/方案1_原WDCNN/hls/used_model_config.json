@@ -1,0 +1,370 @@
+{
+  "project_name": "WDCNN_XJTY_HLS",
+  "model_path": "output/wdcnn_relu.pth",
+  "target_platform": "FPGA",
+  "platform_config": {
+    "board": "Ultra96-V2",
+    "part": "xczu3eg-sbva484-1-i",
+    "hls_clock_ns": 3.33
+  },
+  "vitis_ai_config": {
+    "board": "KV260",
+    "dpu_arch": "DPUCZDX8G_ISA1_B4096",
+    "dpu_clock_mhz": 300
+  },
+  "target_limit": {
+    "DSP_LIMIT": 360,
+    "LUT_LIMIT": 70560,
+    "BRAM_LIMIT": 432,
+    "MAC_LIMIT": 360,
+    "LOGIC_LIMIT": 70560,
+    "SRAM_LIMIT": 432,
+    "MAC_PER_LAYER_LIMIT": 64
+  },
+  "io_config": {
+    "axi_width_in": 512,
+    "axi_width_out": 32
+  },
+  "experiment_config": {
+    "dsp_limits": [
+      360
+    ],
+    "axi_modes": [
+      "shared"
+    ]
+  },
+  "allocator_config": {
+    "non_bottleneck_reclaim_ratio": 0.75,
+    "bottleneck_threshold_ratio": 0.98,
+    "max_search_steps": 5000,
+    "balance_policy": "target_cycle",
+    "target_cycle": 70000,
+    "target_cycle_config": {
+      "mode": "auto_from_total_macs",
+      "effective_lane_budget": 60,
+      "round_to": 1000
+    },
+    "resource_model": {
+      "calibration": {
+        "DSP": 1.15,
+        "LUT": 6.0,
+        "BRAM": 2.1
+      },
+      "guard_ratio": {
+        "DSP": 0.8,
+        "LUT": 0.8,
+        "BRAM": 0.8
+      }
+    },
+    "post_target_refinement": {
+      "enabled": true,
+      "trigger_global_mac_util_below_pct": 85.0,
+      "max_latency_increase_ratio": 0.02
+    },
+    "small_layer_mac_threshold": 1024,
+    "conv_balance_lane_threshold": 16,
+    "conv_prefer_simd_when_large": 4,
+    "conv_prefer_simd_when_small": 2,
+    "conv_large_feature_width_factor": 64,
+    "fc_prefer_pe_over_simd": true,
+    "rebalance_tolerance": 0.02,
+    "post_reclaim_policy": "utilization_first",
+    "upgrade_gain_min": 0.0,
+    "diagnosis_guided_pressure_weight_compute": 0.05,
+    "diagnosis_guided_pressure_weight_memory": 0.25,
+    "diagnosis_guided_pressure_weight_stream": 0.2,
+    "stream_simd_upgrade_penalty": 0.08,
+    "memory_simd_upgrade_penalty": 0.05,
+    "balance_diff_penalty": 0.01,
+    "resource_fit_max_latency_increase_ratio": 0.02
+  },
+  "candidate_config": {
+    "pe_candidate_pool": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32
+    ],
+    "simd_candidate_pool": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32
+    ],
+    "first_layer_simd_max": 4,
+    "fc_simd_max": 4,
+    "fc_pe_max": 8
+  },
+  "diagnosis_config": {
+    "bw_peak_ratio_threshold": 0.6,
+    "mac_util_high_threshold": 0.7,
+    "stream_risk_high_threshold": 0.3,
+    "mismatch_rounds_high_threshold": 2,
+    "low_mac_util_threshold": 30.0,
+    "med_mac_util_threshold": 60.0
+  },
+  "stream_config": {
+    "stream_ratio_medium": 2.0,
+    "stream_ratio_high": 4.0,
+    "stream_ratio_very_high": 8.0,
+    "stream_risk_add_ratio_medium": 0.12,
+    "stream_risk_add_ratio_high": 0.3,
+    "stream_risk_add_mismatch_medium": 0.2,
+    "stream_risk_add_mismatch_high": 0.35,
+    "stream_risk_add_pool": 0.1,
+    "stream_risk_add_first": 0.1,
+    "stream_risk_add_last": 0.05,
+    "stream_risk_add_large_simd": 0.05,
+    "depth_base": 16,
+    "depth_medium": 32,
+    "depth_high": 64,
+    "first_layer_depth_min": 64,
+    "conv_depth_high_risk": 32,
+    "out_depth_high_risk": 32
+  },
+  "resource_model_config": {
+    "resource_overhead_pe_threshold": 8,
+    "resource_overhead_pe_add": 0.05,
+    "resource_overhead_simd_threshold": 8,
+    "resource_overhead_simd_add": 0.05,
+    "resource_overhead_fc_simd_threshold": 4,
+    "resource_overhead_fc_simd_add": 0.1,
+    "memory_block_bits": 18432
+  },
+  "dataset_config": {
+    "train_path": "data/XJTY_train_amp.csv",
+    "test_path": "data/XJTY_test_amp.csv",
+    "data_path": "data/XJTY_classifier.csv",
+    "feature_length": 5120,
+    "feature_height": 1,
+    "num_classes": 4,
+    "test_samples": 240,
+    "test_policy": "balanced"
+  },
+  "quantization_config": {
+    "output_path": "quant_config.json",
+    "report_path": "output/wdcnn_relu_quant_report.json",
+    "activation_bit": 8,
+    "weight_bit": 8,
+    "input_scale": 127.0,
+    "shift": 17,
+    "inc_limit": 65535,
+    "calibration_source": "train",
+    "calibration_policy": "balanced",
+    "calibration_samples": 400,
+    "activation_percentile": 99.9,
+    "refine_enabled": false,
+    "refine_samples_per_class": 20,
+    "refine_rounds": 1,
+    "eval_batch_size": 8,
+    "evaluation_source": "test"
+  },
+  "activation_bit": 8,
+  "acc_bit": 32,
+  "inc_bit": 16,
+  "bias_bit": 32,
+  "mul_bit": 64,
+  "layers": [
+    {
+      "name": "Conv1",
+      "type": "conv",
+      "inputs": [
+        "data_in"
+      ],
+      "outputs": [
+        "conv1_out"
+      ],
+      "in_ch": 1,
+      "out_ch": 16,
+      "k": 64,
+      "s": 7,
+      "p": 1,
+      "activation": "relu",
+      "pool_chain": [
+        {
+          "k": 2,
+          "s": 2
+        }
+      ],
+      "use_uram": false,
+      "fixed_pe": 16,
+      "fixed_simd": 1,
+      "specialized_op": "conv1",
+      "pth": {
+        "w_idx": 0,
+        "conv_bias_idx": 1,
+        "bn_w_idx": 2,
+        "bn_b_idx": 3,
+        "bn_mean_idx": 4,
+        "bn_var_idx": 5
+      }
+    },
+    {
+      "name": "Conv2",
+      "type": "conv",
+      "inputs": [
+        "conv1_out"
+      ],
+      "outputs": [
+        "conv2_out"
+      ],
+      "in_ch": 16,
+      "out_ch": 32,
+      "k": 3,
+      "s": 1,
+      "p": 1,
+      "activation": "relu",
+      "pool_chain": [
+        {
+          "k": 2,
+          "s": 2
+        }
+      ],
+      "use_uram": false,
+      "pth": {
+        "w_idx": 7,
+        "conv_bias_idx": 8,
+        "bn_w_idx": 9,
+        "bn_b_idx": 10,
+        "bn_mean_idx": 11,
+        "bn_var_idx": 12
+      }
+    },
+    {
+      "name": "Conv3",
+      "type": "conv",
+      "inputs": [
+        "conv2_out"
+      ],
+      "outputs": [
+        "conv3_out"
+      ],
+      "in_ch": 32,
+      "out_ch": 64,
+      "k": 3,
+      "s": 1,
+      "p": 1,
+      "activation": "relu",
+      "pool_chain": [
+        {
+          "k": 2,
+          "s": 2
+        }
+      ],
+      "use_uram": false,
+      "pth": {
+        "w_idx": 14,
+        "conv_bias_idx": 15,
+        "bn_w_idx": 16,
+        "bn_b_idx": 17,
+        "bn_mean_idx": 18,
+        "bn_var_idx": 19
+      }
+    },
+    {
+      "name": "Conv4",
+      "type": "conv",
+      "inputs": [
+        "conv3_out"
+      ],
+      "outputs": [
+        "conv4_out"
+      ],
+      "in_ch": 64,
+      "out_ch": 64,
+      "k": 3,
+      "s": 1,
+      "p": 1,
+      "activation": "relu",
+      "pool_chain": [
+        {
+          "k": 2,
+          "s": 2
+        }
+      ],
+      "use_uram": false,
+      "pth": {
+        "w_idx": 21,
+        "conv_bias_idx": 22,
+        "bn_w_idx": 23,
+        "bn_b_idx": 24,
+        "bn_mean_idx": 25,
+        "bn_var_idx": 26
+      }
+    },
+    {
+      "name": "Conv5",
+      "type": "conv",
+      "inputs": [
+        "conv4_out"
+      ],
+      "outputs": [
+        "conv5_out"
+      ],
+      "in_ch": 64,
+      "out_ch": 64,
+      "k": 3,
+      "s": 1,
+      "p": 0,
+      "activation": "relu",
+      "pool_chain": [
+        {
+          "k": 2,
+          "s": 2
+        }
+      ],
+      "use_uram": false,
+      "pth": {
+        "w_idx": 28,
+        "conv_bias_idx": 29,
+        "bn_w_idx": 30,
+        "bn_b_idx": 31,
+        "bn_mean_idx": 32,
+        "bn_var_idx": 33
+      }
+    },
+    {
+      "name": "FC1",
+      "type": "fc",
+      "inputs": [
+        "conv5_out"
+      ],
+      "outputs": [
+        "fc1_out"
+      ],
+      "in_features": 1344,
+      "out_features": 100,
+      "activation": "relu",
+      "is_flatten": true,
+      "use_uram": false,
+      "pth": {
+        "w_idx": 35,
+        "b_idx": 36
+      }
+    },
+    {
+      "name": "FC2",
+      "type": "fc",
+      "inputs": [
+        "fc1_out"
+      ],
+      "outputs": [
+        "network_out"
+      ],
+      "in_features": 100,
+      "out_features": 4,
+      "activation": "none",
+      "is_flatten": false,
+      "use_uram": false,
+      "pth": {
+        "w_idx": 37,
+        "b_idx": 38
+      }
+    }
+  ],
+  "axi_mode": "shared"
+}

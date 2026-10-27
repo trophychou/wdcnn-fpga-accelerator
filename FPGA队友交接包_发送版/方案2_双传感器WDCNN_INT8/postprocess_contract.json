@@ -1,0 +1,22 @@
+{
+  "status": "training_oof_selected_for_outer_fold_01_prototype_only",
+  "vibration_output_scale": 0.14028929162213183,
+  "current_output_scale": 0.04238271713256836,
+  "vibration_temperature": 2.0,
+  "current_temperature": 4.0,
+  "selected_rule": {
+    "id": 56,
+    "recipe": "legacy",
+    "rule": "pair_assistance",
+    "pair": null,
+    "profile": "U",
+    "vibration_margin_max": 0.2,
+    "current_confidence_min": 0.45,
+    "current_margin_min": 0.08,
+    "current_weight": 0.45
+  },
+  "probability_conversion": "p=softmax(int8_logits*branch_output_scale), then pT=softmax(log(p)/temperature); equivalently softmax(int8_logits*output_scale/temperature)",
+  "gate": "Require different top classes, current top class appears in vibration top-2, vibration top1-top2 <= vibration_margin_max, current top confidence >= current_confidence_min, current top1-top2 >= current_margin_min; if selected pair is non-null also require that directed pair.",
+  "fusion": "On gate only: fused=(1-current_weight)*vibration_probability+current_weight*current_probability. Otherwise use vibration_probability. Choose argmax; ties use first class index.",
+  "source_selection_sha256": "0c75273cb537ac42a210ccc0e026747cf6025dd4290945234920a96d66f601c0"
+}
