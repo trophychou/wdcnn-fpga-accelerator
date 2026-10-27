@@ -1,0 +1,70 @@
+{
+  "branch": "vibration",
+  "recipe": "vibration",
+  "input_shape": [
+    "batch",
+    5,
+    5120
+  ],
+  "output_shape": [
+    "batch",
+    3
+  ],
+  "labels": [
+    "healthy",
+    "outer_ring",
+    "inner_ring"
+  ],
+  "normalization": {
+    "method": "per-record-channel DC removal then divide training-channel RMS",
+    "channel_rms": [
+      0.7240445613861084,
+      0.6202703714370728,
+      0.6501741409301758,
+      0.5666046738624573,
+      0.6116041541099548
+    ]
+  },
+  "training_bearings": [
+    "K001",
+    "K003",
+    "K004",
+    "K005",
+    "K006",
+    "KA03",
+    "KA04",
+    "KA05",
+    "KA06",
+    "KA07",
+    "KA08",
+    "KA09",
+    "KA15",
+    "KA16",
+    "KA22",
+    "KA30",
+    "KI04",
+    "KI05",
+    "KI07",
+    "KI08",
+    "KI14",
+    "KI16",
+    "KI17",
+    "KI18",
+    "KI21"
+  ],
+  "training_records": 2000,
+  "edm_excluded": [
+    "KA01",
+    "KI01"
+  ],
+  "seed": 2026102790,
+  "epochs": 4,
+  "learning_rates": [
+    0.001,
+    0.001,
+    0.001,
+    0.001
+  ],
+  "selection_lock_sha256": "8add8fd8c0e482df927056a03c82af17ef1e2aeb4e316162e94da672130fe37c",
+  "checkpoint_sha256": "b61bf8db41518e9cd5cef0da11a6c0b1cc29dc6ce808fa4a6e611f4d509fe9fd"
+}

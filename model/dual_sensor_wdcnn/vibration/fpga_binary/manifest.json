@@ -1,0 +1,271 @@
+{
+  "format": "C-order signed INT8 / little-endian signed INT32",
+  "model_graph_sha256": "b3a40fd41d395a2255068dd2d2d702b43ac70a19fded82fac205f2a896af59da",
+  "parameters_sha256": "c91b999a50b48f690436fd20ce6b0479a44a8cd593b894e8fd42f508c851cac2",
+  "layers": [
+    {
+      "name": "conv1",
+      "weight_layout": "OIK",
+      "weight_shape": [
+        16,
+        5,
+        64
+      ],
+      "weight": {
+        "file": "weights_int8.bin",
+        "offset_bytes": 0,
+        "bytes": 5120,
+        "elements": 5120,
+        "dtype": "i1"
+      },
+      "bias": {
+        "file": "biases_int32_le.bin",
+        "offset_bytes": 0,
+        "bytes": 64,
+        "elements": 16,
+        "dtype": "<i4"
+      },
+      "multiplier": {
+        "file": "multipliers_int32_le.bin",
+        "offset_bytes": 0,
+        "bytes": 64,
+        "elements": 16,
+        "dtype": "<i4"
+      },
+      "shift": {
+        "file": "shifts_int32_le.bin",
+        "offset_bytes": 0,
+        "bytes": 64,
+        "elements": 16,
+        "dtype": "<i4"
+      }
+    },
+    {
+      "name": "conv2",
+      "weight_layout": "OIK",
+      "weight_shape": [
+        32,
+        16,
+        3
+      ],
+      "weight": {
+        "file": "weights_int8.bin",
+        "offset_bytes": 5120,
+        "bytes": 1536,
+        "elements": 1536,
+        "dtype": "i1"
+      },
+      "bias": {
+        "file": "biases_int32_le.bin",
+        "offset_bytes": 64,
+        "bytes": 128,
+        "elements": 32,
+        "dtype": "<i4"
+      },
+      "multiplier": {
+        "file": "multipliers_int32_le.bin",
+        "offset_bytes": 64,
+        "bytes": 128,
+        "elements": 32,
+        "dtype": "<i4"
+      },
+      "shift": {
+        "file": "shifts_int32_le.bin",
+        "offset_bytes": 64,
+        "bytes": 128,
+        "elements": 32,
+        "dtype": "<i4"
+      }
+    },
+    {
+      "name": "conv3",
+      "weight_layout": "OIK",
+      "weight_shape": [
+        64,
+        32,
+        3
+      ],
+      "weight": {
+        "file": "weights_int8.bin",
+        "offset_bytes": 6656,
+        "bytes": 6144,
+        "elements": 6144,
+        "dtype": "i1"
+      },
+      "bias": {
+        "file": "biases_int32_le.bin",
+        "offset_bytes": 192,
+        "bytes": 256,
+        "elements": 64,
+        "dtype": "<i4"
+      },
+      "multiplier": {
+        "file": "multipliers_int32_le.bin",
+        "offset_bytes": 192,
+        "bytes": 256,
+        "elements": 64,
+        "dtype": "<i4"
+      },
+      "shift": {
+        "file": "shifts_int32_le.bin",
+        "offset_bytes": 192,
+        "bytes": 256,
+        "elements": 64,
+        "dtype": "<i4"
+      }
+    },
+    {
+      "name": "conv4",
+      "weight_layout": "OIK",
+      "weight_shape": [
+        64,
+        64,
+        3
+      ],
+      "weight": {
+        "file": "weights_int8.bin",
+        "offset_bytes": 12800,
+        "bytes": 12288,
+        "elements": 12288,
+        "dtype": "i1"
+      },
+      "bias": {
+        "file": "biases_int32_le.bin",
+        "offset_bytes": 448,
+        "bytes": 256,
+        "elements": 64,
+        "dtype": "<i4"
+      },
+      "multiplier": {
+        "file": "multipliers_int32_le.bin",
+        "offset_bytes": 448,
+        "bytes": 256,
+        "elements": 64,
+        "dtype": "<i4"
+      },
+      "shift": {
+        "file": "shifts_int32_le.bin",
+        "offset_bytes": 448,
+        "bytes": 256,
+        "elements": 64,
+        "dtype": "<i4"
+      }
+    },
+    {
+      "name": "conv5",
+      "weight_layout": "OIK",
+      "weight_shape": [
+        64,
+        64,
+        3
+      ],
+      "weight": {
+        "file": "weights_int8.bin",
+        "offset_bytes": 25088,
+        "bytes": 12288,
+        "elements": 12288,
+        "dtype": "i1"
+      },
+      "bias": {
+        "file": "biases_int32_le.bin",
+        "offset_bytes": 704,
+        "bytes": 256,
+        "elements": 64,
+        "dtype": "<i4"
+      },
+      "multiplier": {
+        "file": "multipliers_int32_le.bin",
+        "offset_bytes": 704,
+        "bytes": 256,
+        "elements": 64,
+        "dtype": "<i4"
+      },
+      "shift": {
+        "file": "shifts_int32_le.bin",
+        "offset_bytes": 704,
+        "bytes": 256,
+        "elements": 64,
+        "dtype": "<i4"
+      }
+    },
+    {
+      "name": "fc1",
+      "weight_layout": "OI",
+      "weight_shape": [
+        100,
+        1344
+      ],
+      "weight": {
+        "file": "weights_int8.bin",
+        "offset_bytes": 37376,
+        "bytes": 134400,
+        "elements": 134400,
+        "dtype": "i1"
+      },
+      "bias": {
+        "file": "biases_int32_le.bin",
+        "offset_bytes": 960,
+        "bytes": 400,
+        "elements": 100,
+        "dtype": "<i4"
+      },
+      "multiplier": {
+        "file": "multipliers_int32_le.bin",
+        "offset_bytes": 960,
+        "bytes": 400,
+        "elements": 100,
+        "dtype": "<i4"
+      },
+      "shift": {
+        "file": "shifts_int32_le.bin",
+        "offset_bytes": 960,
+        "bytes": 400,
+        "elements": 100,
+        "dtype": "<i4"
+      }
+    },
+    {
+      "name": "fc2",
+      "weight_layout": "OI",
+      "weight_shape": [
+        3,
+        100
+      ],
+      "weight": {
+        "file": "weights_int8.bin",
+        "offset_bytes": 171776,
+        "bytes": 300,
+        "elements": 300,
+        "dtype": "i1"
+      },
+      "bias": {
+        "file": "biases_int32_le.bin",
+        "offset_bytes": 1360,
+        "bytes": 12,
+        "elements": 3,
+        "dtype": "<i4"
+      },
+      "multiplier": {
+        "file": "multipliers_int32_le.bin",
+        "offset_bytes": 1360,
+        "bytes": 12,
+        "elements": 3,
+        "dtype": "<i4"
+      },
+      "shift": {
+        "file": "shifts_int32_le.bin",
+        "offset_bytes": 1360,
+        "bytes": 12,
+        "elements": 3,
+        "dtype": "<i4"
+      }
+    }
+  ],
+  "sha256": {
+    "weights_int8.bin": "5718eb300ffb8349fca826dfcca1762f30e7a2eebf741a4321eefef290a0cfef",
+    "biases_int32_le.bin": "39eb85a2410e3fede3b8a1a1a885cc1bd8628309a1c44781b933a610199670ae",
+    "multipliers_int32_le.bin": "5d7118531ae4ff493553addcbf08e1563b97b6e3aaa0378c2ef0cc1ff625083a",
+    "shifts_int32_le.bin": "d7f9d2f2ebcebd8329d5c700c5614a85eb51ca121df5d3460be93b91c50872bb"
+  },
+  "note": "Parameter-only export. No absent test-vector references. INT64 multiply and ties-away rounding are required."
+}

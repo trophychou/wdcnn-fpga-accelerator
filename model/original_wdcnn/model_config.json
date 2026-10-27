@@ -1,0 +1,160 @@
+{
+  "format": "original_WDCNN_ReLU_four_classes",
+  "checkpoint": "wdcnn_relu.pth",
+  "checkpoint_sha256": "362e592f3ab72e1367f1afeec402920de2917442ce08930e7d9cfd9a8b86580b",
+  "retrained_for_this_handoff": false,
+  "sampling_hz": null,
+  "input": {
+    "dtype": "float32",
+    "layout": "NCL",
+    "shape": [
+      "batch",
+      1,
+      5120
+    ],
+    "preprocessing": "Values must match original XJTY amplitude CSV convention. No automatic normalization/resampling.",
+    "raw_sampling_rate_and_physical_unit_verified": false
+  },
+  "output": {
+    "shape": [
+      "batch",
+      4
+    ],
+    "labels": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "semantics_verified": false
+  },
+  "layers": [
+    {
+      "name": "Conv1",
+      "type": "conv",
+      "in_ch": 1,
+      "out_ch": 16,
+      "k": 64,
+      "s": 7,
+      "p": 1,
+      "activation": "relu",
+      "pool_chain": [
+        {
+          "k": 2,
+          "s": 2
+        }
+      ]
+    },
+    {
+      "name": "Conv2",
+      "type": "conv",
+      "in_ch": 16,
+      "out_ch": 32,
+      "k": 3,
+      "s": 1,
+      "p": 1,
+      "activation": "relu",
+      "pool_chain": [
+        {
+          "k": 2,
+          "s": 2
+        }
+      ]
+    },
+    {
+      "name": "Conv3",
+      "type": "conv",
+      "in_ch": 32,
+      "out_ch": 64,
+      "k": 3,
+      "s": 1,
+      "p": 1,
+      "activation": "relu",
+      "pool_chain": [
+        {
+          "k": 2,
+          "s": 2
+        }
+      ]
+    },
+    {
+      "name": "Conv4",
+      "type": "conv",
+      "in_ch": 64,
+      "out_ch": 64,
+      "k": 3,
+      "s": 1,
+      "p": 1,
+      "activation": "relu",
+      "pool_chain": [
+        {
+          "k": 2,
+          "s": 2
+        }
+      ]
+    },
+    {
+      "name": "Conv5",
+      "type": "conv",
+      "in_ch": 64,
+      "out_ch": 64,
+      "k": 3,
+      "s": 1,
+      "p": 0,
+      "activation": "relu",
+      "pool_chain": [
+        {
+          "k": 2,
+          "s": 2
+        }
+      ]
+    },
+    {
+      "name": "FC1",
+      "type": "fc",
+      "in_features": 1344,
+      "out_features": 100,
+      "activation": "relu"
+    },
+    {
+      "name": "FC2",
+      "type": "fc",
+      "in_features": 100,
+      "out_features": 4,
+      "activation": "none"
+    }
+  ],
+  "batchnorm": {
+    "after_convs": true,
+    "eps": 1e-05,
+    "affine": true,
+    "track_running_stats": true
+  },
+  "flatten_order": "C then L, 64*21=1344",
+  "pytorch_fc_indices": [
+    0,
+    2
+  ],
+  "int8": {
+    "weights_directory": "weights_int8_csv",
+    "quantization": "quant_config.json",
+    "input": "round_away_from_zero(x*S_IN_SCALE), clip[-128,127]",
+    "layer_rule": "acc=sum(qx*qw); y=(int64(acc)*INC arithmetic_right_shift SHIFT)+exported_bias; then ReLU/saturation.",
+    "bias_position": "AFTER rescaling, unlike the new model.",
+    "weight_layout": "CSV flattened C-order: convolution OIK; fully-connected OI.",
+    "weights_dtype": "signed int8",
+    "bias_dtype": "signed int32",
+    "accumulator": "signed int32",
+    "multiply": "signed int64",
+    "saturation": [
+      -128,
+      127
+    ],
+    "relu_saturation": [
+      0,
+      127
+    ],
+    "network_output": "4 signed INT8 scores"
+  },
+  "source_model_config_sha256": "14d7e830cb6a7875c26359993197dd83a5908d47d8d0f7c757f577c2b046a774"
+}

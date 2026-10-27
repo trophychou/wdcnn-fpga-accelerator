@@ -1,0 +1,2 @@
+/model/** -text
+/model/**/*.csv -diff

@@ -1,0 +1,76 @@
+{
+  "branch": "current",
+  "recipe": "order_whitened",
+  "input_shape": [
+    "batch",
+    4,
+    5120
+  ],
+  "output_shape": [
+    "batch",
+    3
+  ],
+  "labels": [
+    "healthy",
+    "outer_ring",
+    "inner_ring"
+  ],
+  "normalization": {
+    "method": "training-global per-channel mean/std",
+    "channel_mean_std": [
+      [
+        -81.64045715332031,
+        -81.64044189453125,
+        -0.06891384720802307,
+        -79.96614837646484
+      ],
+      [
+        7.3020548820495605,
+        7.421779155731201,
+        4.910545349121094,
+        6.4299187660217285
+      ]
+    ]
+  },
+  "training_bearings": [
+    "K001",
+    "K003",
+    "K004",
+    "K005",
+    "K006",
+    "KA03",
+    "KA04",
+    "KA05",
+    "KA06",
+    "KA07",
+    "KA08",
+    "KA09",
+    "KA15",
+    "KA16",
+    "KA22",
+    "KA30",
+    "KI04",
+    "KI05",
+    "KI07",
+    "KI08",
+    "KI14",
+    "KI16",
+    "KI17",
+    "KI18",
+    "KI21"
+  ],
+  "training_records": 2000,
+  "edm_excluded": [
+    "KA01",
+    "KI01"
+  ],
+  "seed": 2026102791,
+  "epochs": 3,
+  "learning_rates": [
+    0.0003,
+    0.0003,
+    0.0003
+  ],
+  "selection_lock_sha256": "8add8fd8c0e482df927056a03c82af17ef1e2aeb4e316162e94da672130fe37c",
+  "checkpoint_sha256": "9046a77db7cef8d59cec345926b63139a957898d7c2c841b647a348dc0d1466f"
+}

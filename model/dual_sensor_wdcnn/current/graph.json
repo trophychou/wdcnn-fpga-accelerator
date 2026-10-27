@@ -1,0 +1,164 @@
+{
+  "format": "WDCNN_signed_W8A8_v1",
+  "qmin": -127,
+  "qmax": 127,
+  "zero_point": 0,
+  "rounding": "nearest_ties_away_from_zero",
+  "input_scale": 0.08576604137270469,
+  "output_scale": 0.03037547501992053,
+  "activation_calibration": "absolute maximum over all 2000 full-pool training records; EDM excluded",
+  "accumulator": "int32",
+  "requantization_product": "int64",
+  "layers": [
+    {
+      "name": "conv1",
+      "kind": "conv",
+      "stride": 7,
+      "padding": 1,
+      "relu": true,
+      "pool": 2,
+      "weight_shape": [
+        16,
+        4,
+        64
+      ],
+      "input_scale": 0.08576604137270469,
+      "output_scale": 0.10095089439332015,
+      "int32_accumulator_bound": 2024329,
+      "weight_layout": "OIK",
+      "real_to_integer_multiplier_max_error": 2.0606541646650545e-13
+    },
+    {
+      "name": "conv2",
+      "kind": "conv",
+      "stride": 1,
+      "padding": 1,
+      "relu": true,
+      "pool": 2,
+      "weight_shape": [
+        32,
+        16,
+        3
+      ],
+      "input_scale": 0.10095089439332015,
+      "output_scale": 0.12216772244671198,
+      "int32_accumulator_bound": 439172,
+      "weight_layout": "OIK",
+      "real_to_integer_multiplier_max_error": 8.826953924734315e-13
+    },
+    {
+      "name": "conv3",
+      "kind": "conv",
+      "stride": 1,
+      "padding": 1,
+      "relu": true,
+      "pool": 2,
+      "weight_shape": [
+        64,
+        32,
+        3
+      ],
+      "input_scale": 0.12216772244671198,
+      "output_scale": 0.1094456019364004,
+      "int32_accumulator_bound": 828810,
+      "weight_layout": "OIK",
+      "real_to_integer_multiplier_max_error": 9.05470143308662e-13
+    },
+    {
+      "name": "conv4",
+      "kind": "conv",
+      "stride": 1,
+      "padding": 1,
+      "relu": true,
+      "pool": 2,
+      "weight_shape": [
+        64,
+        64,
+        3
+      ],
+      "input_scale": 0.1094456019364004,
+      "output_scale": 0.08274027306263841,
+      "int32_accumulator_bound": 1590781,
+      "weight_layout": "OIK",
+      "real_to_integer_multiplier_max_error": 8.886940662533593e-13
+    },
+    {
+      "name": "conv5",
+      "kind": "conv",
+      "stride": 1,
+      "padding": 0,
+      "relu": true,
+      "pool": 2,
+      "weight_shape": [
+        64,
+        64,
+        3
+      ],
+      "input_scale": 0.08274027306263841,
+      "output_scale": 0.08755093672144132,
+      "int32_accumulator_bound": 1574689,
+      "weight_layout": "OIK",
+      "real_to_integer_multiplier_max_error": 4.519496756005825e-13
+    },
+    {
+      "name": "fc1",
+      "kind": "linear",
+      "relu": true,
+      "pool": 0,
+      "weight_shape": [
+        100,
+        1344
+      ],
+      "input_scale": 0.08755093672144132,
+      "output_scale": 0.04260772795189084,
+      "int32_accumulator_bound": 9884052,
+      "weight_layout": "OI",
+      "real_to_integer_multiplier_max_error": 2.2594870852793436e-13
+    },
+    {
+      "name": "fc2",
+      "kind": "linear",
+      "relu": false,
+      "pool": 0,
+      "weight_shape": [
+        3,
+        100
+      ],
+      "input_scale": 0.04260772795189084,
+      "output_scale": 0.03037547501992053,
+      "int32_accumulator_bound": 807662,
+      "weight_layout": "OI",
+      "real_to_integer_multiplier_max_error": 4.4837983152745675e-13
+    }
+  ],
+  "branch": "current",
+  "recipe": "order_whitened",
+  "normalization": {
+    "method": "training-global per-channel mean/std",
+    "channel_mean_std": [
+      [
+        -81.64045715332031,
+        -81.64044189453125,
+        -0.06891384720802307,
+        -79.96614837646484
+      ],
+      [
+        7.3020548820495605,
+        7.421779155731201,
+        4.910545349121094,
+        6.4299187660217285
+      ]
+    ]
+  },
+  "labels": [
+    "healthy",
+    "outer_ring",
+    "inner_ring"
+  ],
+  "input_shape": [
+    "batch",
+    4,
+    5120
+  ],
+  "checkpoint_sha256": "9046a77db7cef8d59cec345926b63139a957898d7c2c841b647a348dc0d1466f"
+}
