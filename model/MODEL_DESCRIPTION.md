@@ -6,16 +6,16 @@
 
 | 项目 | 方案一 `original_wdcnn/` | 方案二 `dual_sensor_wdcnn/` |
 |---|---|---|
-| 用途 | 保留最初工程的四分类 WDCNN | 用振动为主、电机电流辅助，判断损伤位置 |
-| 是否重新训练 | 没有，原权重原样保留 | 已完成全量部署重训，两条支路各使用全部 25 只普通轴承、2000 条记录 |
+| 用途 | 原结构四分类 WDCNN 的 8 kHz 仿真回放重训版 | 用振动为主、电机电流辅助，判断损伤位置 |
+| 是否重新训练 | 已重新训练 960 条原数值样本、固定 20 轮，并重新量化 | 已完成全量部署重训，两条支路各使用全部 25 只普通轴承、2000 条记录 |
 | 物理输入 | 原工程单通道振动输入 | 同步的 1 路振动 + 2 路电机相电流 |
-| 原始采样率 | 原工程未找到可确认的说明；不能称为 8 kHz 模型 | **每一个物理通道均为 8000 Hz** |
+| 采样率与来源 | 原 CSV 物理采样率未知；赋予每通道 8000 Hz 仿真回放时钟，并非已证明的物理重采样 | **每一个物理通道均为 8000 Hz** |
 | 网络输入 | `[batch,1,5120]`，数值必须符合原 XJTY CSV 的处理约定 | 振动特征 `[batch,5,5120]`；电流特征 `[batch,4,5120]` |
 | 输出 | 4 类分数，类别编号 0/1/2/3 | 每条支路 3 类分数，融合后输出健康/外圈损伤/内圈损伤 |
 | 浮点参数 | `wdcnn_relu.pth` | 两个 `model_fp32.pth` |
-| 整数参数 | 原工程 INT8 权重/偏置 CSV 与 `quant_config.json` | 两套新导出的 W8A8 参数，提供 NPZ 和 FPGA 二进制两种等价存储 |
+| 整数参数 | 本次重训权重配套的新 INT8 权重/偏置 CSV 与 `quant_config.json` | 两套新导出的 W8A8 参数，提供 NPZ 和 FPGA 二进制两种等价存储 |
 
-**方案一不是“把原数据改成 8 kHz 后重训”的模型。** 方案二是基于 Paderborn 数据另行训练的双支路三分类模型。两者虽然都属于 WDCNN，数据、预处理、输入通道数、输出任务及量化规则不同，不能互换参数。
+**方案一现已替换为 2026-10-28 的重训权重，并同步重新导出全部配套 INT8 参数。原 CSV 缺少可核实的采样率，数值和原 960/240 划分均保持不变，只赋予 125 μs/点的 8 kHz 仿真回放时钟。每条 5120 点占 0.64 s（最后一点为 0.639875 s），不等于完成真实抗混叠重采样，也不能证明已适配真实 8 kHz 传感器。配置保留 `source_sampling_hz=null`、`physical_resampling_performed=false`。** 方案二是基于 Paderborn 数据另行训练的双支路三分类模型。两者虽然都属于 WDCNN，数据、预处理、输入通道数、输出任务及量化规则不同，不能互换参数。
 
 原四类的物理含义尚缺少可靠标签说明。项目曾暂按损伤程度讨论，但交接时不能把 0/1/2/3 写成已经证实的轻/中/重损伤。方案二明确识别损伤位置，不识别程度。当前也没有验证两个模型对同一个现场输入同时输出“程度+位置”的完整系统。
 
@@ -28,7 +28,7 @@ model/
     wdcnn_relu.pth
     model_config.json
     quant_config.json
-    weights_int8_csv/                # 原工程 7 层的 14 个权重/偏置 CSV
+    weights_int8_csv/                # 本次重训模型 7 层的 14 个新 INT8 权重/偏置 CSV
   dual_sensor_wdcnn/
     pipeline_config.json            # 原始信号处理、类别、门控、温度、来源及文件哈希
     vibration/
@@ -44,6 +44,30 @@ model/
         shifts_int32_le.bin
     current/                        # 与 vibration/ 文件结构相同
 ```
+
+### 方案一各文件用途（本次更新）
+
+| 文件（相对于 `original_wdcnn/`） | 用途 |
+|---|---|
+| `wdcnn_relu.pth` | 新训练的 FP32 四分类网络权重，含 BN 状态 |
+| `model_config.json` | 网络结构、输入输出、8 kHz 回放语义、量化布局及文件 SHA-256 |
+| `quant_config.json` | 输入量化比例 `S_IN_SCALE` 和各层新 `INC/SHIFT` |
+| `weights_int8_csv/01_Conv1_w.csv` | 第 1 卷积层 INT8 权重 |
+| `weights_int8_csv/01_Conv1_b.csv` | 第 1 卷积层 INT32 偏置，右移后加入 |
+| `weights_int8_csv/02_Conv2_w.csv` | 第 2 卷积层 INT8 权重 |
+| `weights_int8_csv/02_Conv2_b.csv` | 第 2 卷积层 INT32 偏置，右移后加入 |
+| `weights_int8_csv/03_Conv3_w.csv` | 第 3 卷积层 INT8 权重 |
+| `weights_int8_csv/03_Conv3_b.csv` | 第 3 卷积层 INT32 偏置，右移后加入 |
+| `weights_int8_csv/04_Conv4_w.csv` | 第 4 卷积层 INT8 权重 |
+| `weights_int8_csv/04_Conv4_b.csv` | 第 4 卷积层 INT32 偏置，右移后加入 |
+| `weights_int8_csv/05_Conv5_w.csv` | 第 5 卷积层 INT8 权重 |
+| `weights_int8_csv/05_Conv5_b.csv` | 第 5 卷积层 INT32 偏置，右移后加入 |
+| `weights_int8_csv/06_FC1_w.csv` | 隐藏全连接层 INT8 权重，已按 HLS 的长度在前、通道在后顺序排列 |
+| `weights_int8_csv/06_FC1_b.csv` | 隐藏全连接层 INT32 偏置，右移后加入 |
+| `weights_int8_csv/07_FC2_w.csv` | 四分类输出层 INT8 权重 |
+| `weights_int8_csv/07_FC2_b.csv` | 四分类输出层 INT32 偏置，右移后加入 |
+
+`MODEL_DESCRIPTION.md` 是 `model/` 中唯一的说明文档。本次不附训练数据、脚本、测试样本、HLS 工程、环境或缓存。方案二所有模型及配置保持原样。
 
 目录共 36 个模型及配置文件，加本说明 1 份。`model_config.json`、`graph.json`、`pipeline_config.json` 和二进制清单是模型运行参数，不是训练数据。NPZ 与 BIN 是同一套参数的两种表示，选择其中一种读取即可，不是额外模型。
 
@@ -162,7 +186,7 @@ Flatten(64*21=1344) -> Linear(1344,100) -> ReLU -> Linear(100,3)
 
 全部权重、量化和门控锁定后，本次另在 KA01、KI01 各 80 条 EDM 记录上做附加复测：FP32 振动 160/160、电流 48/160、融合 160/160；INT8 振动 160/160、电流 52/160、融合 160/160。**只有两只受损轴承、没有健康样本，且这些轴承历史上已被研究过，因此该 100% 不能当成普通三分类总体准确率或外部盲测成绩。** 测后没有据此调整模型。
 
-方案一原权重曾在原有 240 条固定测试向量上复测 240/240；该 100% 的范围是原固定测试集，不构成已证明的跨轴承泛化准确率，不能与新方案的跨轴承成绩直接比较。
+方案一本次重训使用原 960 条训练样本，seed=2026、Adam lr=0.001、batch=32、固定 20 轮；权重锁定后在原 240 条固定测试向量上，FP32 与配套 INT8 均为 240/240（100%）。INT8 仅用训练侧每类前 100 条、共 400 条校准；输入满量程由 960 条训练样本确定，测试集未用于量化校准。独立主机 C++ 读取实际 INT8 CSV 与配置，240 条共 960 个得分与整数参考逐项一致，4 条输入的 8 个整数状态也已独立核对。该 100% 仅适用于原固定数值样本划分，现有映射不足以证明整轴承隔离，也不能证明真实 8 kHz 传感器适配，不能与方案二的跨轴承成绩直接比较。HLS C 仿真、综合、RTL 仿真及上板均未执行。
 
 ## 6. INT8 接口：FPGA 同学优先看这里
 
@@ -183,7 +207,9 @@ NPZ 参数键为 `conv1_weight`、`conv1_bias`、`conv1_multiplier`、`conv1_shi
 
 ### 原方案
 
-使用原 `quant_config.json` 与 `weights_int8_csv/`：输入 `round_away(x*S_IN_SCALE)`，截断 [-128,127]；每层先 `sum(qx*qw)*INC` 算术右移 SHIFT，再加 CSV 偏置并激活/饱和。**原方案偏置在重缩放之后加，且下限 -128；与新方案不同。** 不要把旧 INC/SHIFT 内核不加修改就用于新参数。
+使用本次更新的 `quant_config.json` 与 `weights_int8_csv/`。输入先执行 binary32 乘法 `float32(x)*float32(S_IN_SCALE)`，半值远离零取整，截断 [-128,127]；每层 INT32 累加，INT64 乘本层 `INC` 后算术右移 `SHIFT`（负数向下取整，无最近值舍入），再加 CSV 的 INT32 偏置，执行 ReLU/饱和及相应池化。**方案一偏置在重缩放之后加，且下限 -128；方案二偏置在之前加且采用另一套 Q31 规则。** 换新权重时必须同步使用新的 INC/SHIFT、偏置和权重，不能混用旧模型参数。
+
+方案一 CSV 已按硬件顺序打包：卷积 `[OC,IC/SIMD,K,SIMD]`，5 层 SIMD 分别为 `[1,4,4,4,2]`；FC1 `[100,21,64]`，对应常规张量 `[100,64,21]`；FC2 `[4,100]`。这不是全部按普通 OIK/OI 展平，接入时以 `model_config.json` 为准。
 
 ## 7. FP32 权重读取参考
 
@@ -228,4 +254,4 @@ original.eval(); vibration.eval(); current.eval()
 # 原模型输入则必须遵循原 XJTY 数值约定，不能套用第4节的新预处理。
 ```
 
-`pipeline_config.json` 记录方案二所有参数文件的 SHA-256；两个 BIN 清单也记录各二进制哈希。方案一原 FP32 权重 SHA-256 为 `362e592f3ab72e1367f1afeec402920de2917442ce08930e7d9cfd9a8b86580b`，本次复制后保持一致。
+`pipeline_config.json` 记录方案二所有参数文件的 SHA-256；两个 BIN 清单也记录各二进制哈希。方案一本次新 FP32 权重 SHA-256 为 `fd594060a4c32fbe0ed8d8ea3385e49ee7122c6cfa2391b05a8cec76cf08e475`；方案一 `model_config.json` 记录其余模型参数文件的 SHA-256。本次只更新方案一与本说明，方案二文件未改动。

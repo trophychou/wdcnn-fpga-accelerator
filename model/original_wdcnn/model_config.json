@@ -1,9 +1,9 @@
 {
   "format": "original_WDCNN_ReLU_four_classes",
   "checkpoint": "wdcnn_relu.pth",
-  "checkpoint_sha256": "362e592f3ab72e1367f1afeec402920de2917442ce08930e7d9cfd9a8b86580b",
-  "retrained_for_this_handoff": false,
-  "sampling_hz": null,
+  "checkpoint_sha256": "fd594060a4c32fbe0ed8d8ea3385e49ee7122c6cfa2391b05a8cec76cf08e475",
+  "retrained_for_this_handoff": true,
+  "sampling_hz": 8000,
   "input": {
     "dtype": "float32",
     "layout": "NCL",
@@ -12,7 +12,7 @@
       1,
       5120
     ],
-    "preprocessing": "Values must match original XJTY amplitude CSV convention. No automatic normalization/resampling.",
+    "preprocessing": "Original XJTY CSV values cast to float32, no additional normalization, resampling, or filtering. 5120 points per 0.64s assigned replay period.",
     "raw_sampling_rate_and_physical_unit_verified": false
   },
   "output": {
@@ -138,10 +138,10 @@
   "int8": {
     "weights_directory": "weights_int8_csv",
     "quantization": "quant_config.json",
-    "input": "round_away_from_zero(x*S_IN_SCALE), clip[-128,127]",
-    "layer_rule": "acc=sum(qx*qw); y=(int64(acc)*INC arithmetic_right_shift SHIFT)+exported_bias; then ReLU/saturation.",
-    "bias_position": "AFTER rescaling, unlike the new model.",
-    "weight_layout": "CSV flattened C-order: convolution OIK; fully-connected OI.",
+    "input": "float32 multiplication x*S_IN_SCALE, round half away from zero, clip[-128,127]",
+    "layer_rule": "acc=int32(sum(qx*qw)); y=(int64(acc)*INC arithmetic_floor_right_shift SHIFT)+exported_bias; then ReLU/saturation and configured max pooling.",
+    "bias_position": "AFTER rescaling; differs from dual_sensor_wdcnn Q31 format.",
+    "weight_layout": "Hardware-packed CSV: conv [OC,IC/SIMD,K,SIMD]; FC1 [100,21,64] representing canonical [100,64,21]; FC2 [4,100].",
     "weights_dtype": "signed int8",
     "bias_dtype": "signed int32",
     "accumulator": "signed int32",
@@ -154,7 +154,217 @@
       0,
       127
     ],
-    "network_output": "4 signed INT8 scores"
+    "network_output": "4 signed INT8 scores",
+    "conv_simd_by_layer": [
+      1,
+      4,
+      4,
+      4,
+      2
+    ],
+    "bn_folded": true,
+    "layer_quantization": [
+      {
+        "id": "L1",
+        "name": "Conv1",
+        "kind": "conv",
+        "weight_shape_canonical": [
+          16,
+          1,
+          64
+        ],
+        "simd": 1,
+        "inc": 317,
+        "shift": 17,
+        "s_in": 5.08732560604007,
+        "s_weight": 1278.095101187597,
+        "s_out_ideal": 15.709680147837325,
+        "s_out_effective": 15.725412303670145,
+        "stride": 7,
+        "padding": 1,
+        "relu": true,
+        "pool": 2,
+        "int32_mac_bound": 435328
+      },
+      {
+        "id": "L2",
+        "name": "Conv2",
+        "kind": "conv",
+        "weight_shape_canonical": [
+          32,
+          16,
+          3
+        ],
+        "simd": 4,
+        "inc": 127,
+        "shift": 15,
+        "s_in": 15.709680147837325,
+        "s_weight": 248.367285463453,
+        "s_out_ideal": 15.128682321663714,
+        "s_out_effective": 15.122218870691423,
+        "stride": 1,
+        "padding": 1,
+        "relu": true,
+        "pool": 2,
+        "int32_mac_bound": 380928
+      },
+      {
+        "id": "L3",
+        "name": "Conv3",
+        "kind": "conv",
+        "weight_shape_canonical": [
+          64,
+          32,
+          3
+        ],
+        "simd": 4,
+        "inc": 449,
+        "shift": 17,
+        "s_in": 15.128682321663714,
+        "s_weight": 289.2295188870772,
+        "s_out_ideal": 14.999600368544003,
+        "s_out_effective": 14.989257947321406,
+        "stride": 1,
+        "padding": 1,
+        "relu": true,
+        "pool": 2,
+        "int32_mac_bound": 640384
+      },
+      {
+        "id": "L4",
+        "name": "Conv4",
+        "kind": "conv",
+        "weight_shape_canonical": [
+          64,
+          64,
+          3
+        ],
+        "simd": 4,
+        "inc": 325,
+        "shift": 17,
+        "s_in": 14.999600368544003,
+        "s_weight": 508.04427198920536,
+        "s_out_ideal": 18.920958849884816,
+        "s_out_effective": 18.89533875308178,
+        "stride": 1,
+        "padding": 1,
+        "relu": true,
+        "pool": 2,
+        "int32_mac_bound": 1261824
+      },
+      {
+        "id": "L5",
+        "name": "Conv5",
+        "kind": "conv",
+        "weight_shape_canonical": [
+          64,
+          64,
+          3
+        ],
+        "simd": 2,
+        "inc": 191,
+        "shift": 16,
+        "s_in": 18.920958849884816,
+        "s_weight": 518.5957291737085,
+        "s_out_ideal": 28.62767957604022,
+        "s_out_effective": 28.59733175997244,
+        "stride": 1,
+        "padding": 0,
+        "relu": true,
+        "pool": 2,
+        "int32_mac_bound": 1128704
+      },
+      {
+        "id": "L6",
+        "name": "FC1",
+        "kind": "fc",
+        "weight_shape_canonical": [
+          100,
+          1344
+        ],
+        "simd": 1,
+        "inc": 15,
+        "shift": 17,
+        "s_in": 28.62767957604022,
+        "s_weight": 928.3362408290475,
+        "s_out_ideal": 2.99297145050699,
+        "s_out_effective": 3.041394703820764,
+        "stride": 1,
+        "padding": 0,
+        "relu": true,
+        "pool": 0,
+        "int32_mac_bound": 6717952
+      },
+      {
+        "id": "L7",
+        "name": "FC2",
+        "kind": "fc",
+        "weight_shape_canonical": [
+          4,
+          100
+        ],
+        "simd": 1,
+        "inc": 465,
+        "shift": 17,
+        "s_in": 2.99297145050699,
+        "s_weight": 665.2628753791112,
+        "s_out_ideal": 7.065672064986981,
+        "s_out_effective": 7.063808050443415,
+        "stride": 1,
+        "padding": 0,
+        "relu": false,
+        "pool": 0,
+        "int32_mac_bound": 477824
+      }
+    ],
+    "weight_rounding": "torch.round float32, ties to even; inference input rounds half away from zero."
   },
-  "source_model_config_sha256": "14d7e830cb6a7875c26359993197dd83a5908d47d8d0f7c757f577c2b046a774"
+  "source_model_config_sha256": "dda1cd81cbad618285c9d9f26d36a586e3258e98144694483965d702f6c0ffea",
+  "sampling_hz_per_channel": 8000,
+  "source_sampling_hz": null,
+  "physical_resampling_performed": false,
+  "timebase": "simulation_assigned",
+  "sample_period_seconds": 0.000125,
+  "record_interval_seconds": 0.64,
+  "sampling_note": "Original CSV sampling rate unknown. Original values unchanged; assigned 8kHz replay clock. Not verified physical resampling or native 8kHz acquisition.",
+  "training": {
+    "records": 960,
+    "epochs": 20,
+    "seed": 2026,
+    "batch_size": 32,
+    "optimizer": "Adam",
+    "learning_rate": 0.001,
+    "normalization": "None; original XJTY numerical convention."
+  },
+  "validation": {
+    "records": 240,
+    "fp32_correct": 240,
+    "int8_correct": 240,
+    "scope": "Original fixed sample split; bearing independence and native8kHz sensor adaptation not established.",
+    "calibration_training_records": 400,
+    "input_fullscale_training_records": 960,
+    "test_used_for_calibration_or_tuning": false,
+    "host_cpp_all960_integer_output_scores_exact": true,
+    "hls_csim_run": false,
+    "synthesis_run": false,
+    "board_run": false
+  },
+  "files_sha256": {
+    "quant_config.json": "0a652812995d7245327a9d28558d3ceaed04eb6453a0f6f766fb55b01b64583d",
+    "wdcnn_relu.pth": "fd594060a4c32fbe0ed8d8ea3385e49ee7122c6cfa2391b05a8cec76cf08e475",
+    "weights_int8_csv/01_Conv1_b.csv": "88fdf31279c362c10c39452b92cb2dd248d12ea18002cc817e1e83eaee787d8c",
+    "weights_int8_csv/01_Conv1_w.csv": "7ee7c28c11ebab7631e1eb099745b7ce74c5db2f8ebf43feda78c293c593d7e1",
+    "weights_int8_csv/02_Conv2_b.csv": "72418eb6e09b39a59bbe8d02ea740834721bd79a5b6cc6c8c907face5dd53503",
+    "weights_int8_csv/02_Conv2_w.csv": "8d07f7f71cfa58022c691207ceeaace8de497034be5632f0327816745e328a76",
+    "weights_int8_csv/03_Conv3_b.csv": "608f2c3c3c17a49461af11ae1910b0f33fe45b6495d2d4ddba5d1979b84605e2",
+    "weights_int8_csv/03_Conv3_w.csv": "388a434db7557033140ff94bbbc083358e0d4988e72454f1af92bf1058817c03",
+    "weights_int8_csv/04_Conv4_b.csv": "7a69e927e47e51da6ba32a191b8654afadaea9bb211a041f9a9417d438872208",
+    "weights_int8_csv/04_Conv4_w.csv": "50e3b1e1ff93eef83e9dc2c6d249f1ac34137db0b97c44e49d68bd494793fc81",
+    "weights_int8_csv/05_Conv5_b.csv": "da8a93da240bce89b0a9defe467a12ce2db4b7edfb15c762f668c5c3e64119cc",
+    "weights_int8_csv/05_Conv5_w.csv": "6962e19dab39848e268f6458b0d417100d29510397d1d20aba465a8b230d01da",
+    "weights_int8_csv/06_FC1_b.csv": "a60fc2c35f02cf3606f9818e9ddf715250a27361e810c4d8dfc9cefd6765ca25",
+    "weights_int8_csv/06_FC1_w.csv": "980a49654350cbe4ac9ad76e036977ed6243bff2779c9c38e7f66979fda2b2d4",
+    "weights_int8_csv/07_FC2_b.csv": "0f69496399adaec041d6a6606487f7fdb3928ab97b2af8274f195682abc94129",
+    "weights_int8_csv/07_FC2_w.csv": "d858c2988f3c3490ab96a447b5f98682ccfdf62781846a8ffac3d73e731fe8e6"
+  }
 }

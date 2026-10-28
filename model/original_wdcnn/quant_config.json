@@ -1,45 +1,45 @@
 {
-  "S_IN_SCALE": 5.08732560604007,
+  "S_IN_SCALE": 5.087325572967529,
   "L1": {
     "name": "Conv1",
-    "inc": 363,
+    "inc": 317,
     "shift": 17,
     "w_bit": 8
   },
   "L2": {
     "name": "Conv2",
-    "inc": 155,
+    "inc": 127,
     "shift": 15,
     "w_bit": 8
   },
   "L3": {
     "name": "Conv3",
-    "inc": 421,
+    "inc": 449,
     "shift": 17,
     "w_bit": 8
   },
   "L4": {
     "name": "Conv4",
-    "inc": 223,
-    "shift": 16,
+    "inc": 325,
+    "shift": 17,
     "w_bit": 8
   },
   "L5": {
     "name": "Conv5",
-    "inc": 211,
+    "inc": 191,
     "shift": 16,
     "w_bit": 8
   },
   "L6": {
     "name": "FC1",
-    "inc": 25,
+    "inc": 15,
     "shift": 17,
     "w_bit": 8
   },
   "L7": {
     "name": "FC2",
-    "inc": 41,
-    "shift": 15,
+    "inc": 465,
+    "shift": 17,
     "w_bit": 8
   }
 }
